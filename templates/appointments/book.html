@@ -1,0 +1,741 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Book an Appointment | Family Dental Care
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="/" class="logo">
+
+            <span class="logo-icon">🦷</span>
+
+            <span class="logo-text">
+
+                <strong>
+                    Family Dental Care
+                </strong>
+
+                <small>
+                    Advanced Dental Care
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#about">
+                About
+            </a>
+
+            <a href="/#services">
+                Services
+            </a>
+
+            <a href="/#dentists">
+                Dentists
+            </a>
+
+            <a href="/#gallery">
+                Gallery
+            </a>
+
+            <a href="/#contact">
+                Contact
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= BOOKING PAGE ================= -->
+
+<main class="booking-page">
+
+
+    <!-- HERO -->
+
+    <section class="booking-hero">
+
+        <div class="container">
+
+            <span class="booking-badge">
+                🦷 FAMILY DENTAL CARE
+            </span>
+
+            <h1>
+                Book Your Appointment
+            </h1>
+
+            <p>
+                Schedule your visit with our experienced
+                dental professionals. Complete the form below
+                and our team will contact you to confirm your
+                appointment.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOOKING CONTENT -->
+
+    <section class="booking-section">
+
+        <div class="container booking-layout">
+
+
+            <!-- INFORMATION -->
+
+            <aside class="booking-info">
+
+                <div class="booking-info-card">
+
+                    <span class="info-label">
+                        YOUR DENTAL CARE
+                    </span>
+
+                    <h2>
+                        We're here to
+                        <span>care for your smile.</span>
+                    </h2>
+
+                    <p>
+                        Please provide your information and
+                        preferred appointment details. Your
+                        request will be reviewed by our clinic
+                        team.
+                    </p>
+
+
+                    <div class="booking-benefits">
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Experienced Dentists
+                                </strong>
+
+                                <span>
+                                    Professional and compassionate care
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Modern Treatment
+                                </strong>
+
+                                <span>
+                                    Quality dental services for your needs
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <div class="benefit-icon">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Patient First
+                                </strong>
+
+                                <span>
+                                    Your comfort and safety come first
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="booking-contact">
+
+                        <span>
+                            NEED HELP?
+                        </span>
+
+                        <strong>
+                            +880 1XXXXXXXXX
+                        </strong>
+
+                        <small>
+                            Sat – Thu · 9:00 AM – 9:00 PM
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- FORM -->
+
+            <div class="booking-form-card">
+
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                    <div class="success-message">
+
+                        <div class="success-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Appointment Request Received
+                            </strong>
+
+                            <p>
+                                {{ message }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                {% if form.non_field_errors %}
+
+                <div class="form-error-box">
+                    {{ form.non_field_errors }}
+                </div>
+
+                {% endif %}
+
+
+                <div class="form-header">
+
+                    <span>
+                        APPOINTMENT REQUEST
+                    </span>
+
+                    <h2>
+                        Tell us about your visit
+                    </h2>
+
+                    <p>
+                        Fields marked with
+                        <strong>*</strong>
+                        are required.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    class="appointment-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- PATIENT INFORMATION -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <span class="form-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Patient Information
+                                </h3>
+
+                                <p>
+                                    Tell us who the appointment is for.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="{{ form.full_name.id_for_label }}">
+                                    Full Name *
+                                </label>
+
+                                {{ form.full_name }}
+
+                                {% for error in form.full_name.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.phone.id_for_label }}">
+                                    Phone Number *
+                                </label>
+
+                                {{ form.phone }}
+
+                                {% for error in form.phone.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.email.id_for_label }}">
+                                    Email Address
+                                </label>
+
+                                {{ form.email }}
+
+                                {% for error in form.email.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.date_of_birth.id_for_label }}">
+                                    Date of Birth
+                                </label>
+
+                                {{ form.date_of_birth }}
+
+                                {% for error in form.date_of_birth.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.gender.id_for_label }}">
+                                    Gender
+                                </label>
+
+                                {{ form.gender }}
+
+                                {% for error in form.gender.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.emergency_contact.id_for_label }}">
+                                    Emergency Contact
+                                </label>
+
+                                {{ form.emergency_contact }}
+
+                                {% for error in form.emergency_contact.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="{{ form.address.id_for_label }}">
+                                    Address
+                                </label>
+
+                                {{ form.address }}
+
+                                {% for error in form.address.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- APPOINTMENT DETAILS -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <span class="form-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Appointment Details
+                                </h3>
+
+                                <p>
+                                    Choose your preferred dentist,
+                                    service, date and time.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="{{ form.dentist.id_for_label }}">
+                                    Preferred Dentist *
+                                </label>
+
+                                {{ form.dentist }}
+
+                                {% for error in form.dentist.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.service.id_for_label }}">
+                                    Dental Service *
+                                </label>
+
+                                {{ form.service }}
+
+                                {% for error in form.service.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.appointment_date.id_for_label }}">
+                                    Preferred Date *
+                                </label>
+
+                                {{ form.appointment_date }}
+
+                                {% for error in form.appointment_date.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.appointment_time.id_for_label }}">
+                                    Preferred Time *
+                                </label>
+
+                                {{ form.appointment_time }}
+
+                                {% for error in form.appointment_time.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISIT DETAILS -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <span class="form-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Visit Details
+                                </h3>
+
+                                <p>
+                                    Help our dentist understand your needs.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group full-width">
+
+                                <label for="{{ form.reason.id_for_label }}">
+                                    Reason for Visit
+                                </label>
+
+                                {{ form.reason }}
+
+                                {% for error in form.reason.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="{{ form.notes.id_for_label }}">
+                                    Additional Notes
+                                </label>
+
+                                {{ form.notes }}
+
+                                {% for error in form.notes.errors %}
+                                <small class="field-error">
+                                    {{ error }}
+                                </small>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <div class="form-submit-area">
+
+                        <p>
+                            🔒 Your information is kept private
+                            and used only for appointment management.
+                        </p>
+
+                        <button
+                            type="submit"
+                            class="booking-submit"
+                        >
+
+                            <span>
+                                Submit Appointment Request
+                            </span>
+
+                            <span class="submit-arrow">
+                                →
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-container">
+
+        <div>
+
+            <a
+                href="/"
+                class="logo footer-logo"
+            >
+
+                <span class="logo-icon">
+                    🦷
+                </span>
+
+                <span class="logo-text">
+
+                    <strong>
+                        Family Dental Care
+                    </strong>
+
+                    <small>
+                        Advanced Dental Care
+                    </small>
+
+                </span>
+
+            </a>
+
+            <p>
+                Quality dental care for the whole family.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#about">
+                About
+            </a>
+
+            <a href="/#services">
+                Services
+            </a>
+
+            <a href="/#dentists">
+                Dentists
+            </a>
+
+            <a href="/#gallery">
+                Gallery
+            </a>
+
+            <a href="/#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Family Dental Care.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
