@@ -1,0 +1,368 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Appointments | Family Dental Care</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="/" class="logo">
+
+            <span class="logo-icon">
+                🦷
+            </span>
+
+            <span class="logo-text">
+
+                <strong>
+                    Family Dental Care
+                </strong>
+
+                <small>
+                    Advanced Dental Care
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="{% url 'appointments:list' %}">
+                Appointments
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= APPOINTMENTS ================= -->
+
+<main class="appointments-page">
+
+    <section class="appointments-header">
+
+        <div class="container">
+
+            <div class="appointments-heading">
+
+                <div>
+
+                    <span class="page-label">
+                        CLINIC MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Appointments
+                    </h1>
+
+                    <p>
+                        View and manage all patient appointments
+                        from one place.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/appointments/book/"
+                    class="primary-button"
+                >
+                    + New Appointment
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="appointments-section">
+
+        <div class="container">
+
+
+            <!-- ================= APPOINTMENT COUNT ================= -->
+
+            <div class="appointment-summary">
+
+                <div class="appointment-summary-card">
+
+                    <span>
+                        TOTAL APPOINTMENTS
+                    </span>
+
+                    <strong>
+                        {{ appointments|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TABLE ================= -->
+
+            <div class="appointments-card">
+
+                <div class="appointments-card-header">
+
+                    <div>
+
+                        <h2>
+                            All Appointments
+                        </h2>
+
+                        <p>
+                            Review scheduled patient visits.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if appointments %}
+
+                <div class="appointments-table-wrapper">
+
+                    <table class="appointments-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Patient
+                                </th>
+
+                                <th>
+                                    Dentist
+                                </th>
+
+                                <th>
+                                    Service
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Time
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for appointment in appointments %}
+
+                            <tr>
+
+                                <td>
+
+                                    <strong>
+                                        {{ appointment.patient.full_name }}
+                                    </strong>
+
+                                    <small>
+                                        {{ appointment.patient.phone }}
+                                    </small>
+
+                                </td>
+
+
+                                <td>
+                                    {{ appointment.dentist.name }}
+                                </td>
+
+
+                                <td>
+                                    {{ appointment.service.name }}
+                                </td>
+
+
+                                <td>
+                                    {{ appointment.appointment_date|date:"d M Y" }}
+                                </td>
+
+
+                                <td>
+                                    {{ appointment.appointment_time|time:"g:i A" }}
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="appointment-status status-{{ appointment.status }}"
+                                    >
+                                        {{ appointment.get_status_display }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                <div class="appointments-empty">
+
+                    <div class="appointments-empty-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        No appointments yet
+                    </h3>
+
+                    <p>
+                        There are currently no appointments
+                        registered in the system.
+                    </p>
+
+                    <a
+                        href="/appointments/book/"
+                        class="primary-button"
+                    >
+                        Book First Appointment
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-container">
+
+        <div>
+
+            <a
+                href="/"
+                class="logo footer-logo"
+            >
+
+                <span class="logo-icon">
+                    🦷
+                </span>
+
+                <span class="logo-text">
+
+                    <strong>
+                        Family Dental Care
+                    </strong>
+
+                    <small>
+                        Advanced Dental Care
+                    </small>
+
+                </span>
+
+            </a>
+
+            <p>
+                Quality dental care for the whole family.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="{% url 'appointments:list' %}">
+                Appointments
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Family Dental Care.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,629 +1,357 @@
+<!--
+  ==================================================
+  Designed & Developed by Intasar Mostafiz
+  GitHub: https://github.com/Inta-tech
+  ==================================================
+-->
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Intasar Mostafiz">
+    <meta name="designer" content="Intasar Mostafiz">
     <title>Family Dental Care | Advanced Dental Care</title>
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/style.css' %}"
-    >
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body>
 
 <!-- ================= NAVBAR ================= -->
+<header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
+    <div class="container nav-container" style="max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
 
-<header class="navbar">
-
-    <div class="container nav-container">
-
-        <a href="/" class="logo">
-
-            <span class="logo-icon">🦷</span>
-
-            <span class="logo-text">
-
-                <strong>Family Dental Care</strong>
-
-                <small>Advanced Dental Care</small>
-
+        <!-- Branding (Enlarged Icon & Text) -->
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
+            <span class="logo-icon" style="font-size: 38px; line-height: 1;">🦷</span>
+            <span class="logo-text" style="display: flex; flex-direction: column;">
+                <strong style="font-size: 24px; font-weight: 800; color: #173b3f; line-height: 1.2; letter-spacing: -0.5px;">
+                    Family Dental Care
+                </strong>
+                <small style="font-size: 13px; color: #0b8f8f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">
+                    Advanced Dental Care
+                </small>
             </span>
-
         </a>
 
-        <nav class="nav-links">
+        <!-- Navigation Links & Actions (Organized & Scaled Up) -->
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 24px;">
+            <a href="#home" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Home</a>
+            <a href="#services" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Services</a>
+            <a href="#dentists" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Dentists</a>
+            <a href="#gallery" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Gallery</a>
+            <a href="#about" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">About</a>
+            <a href="#contact" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Contact</a>
 
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#dentists">Dentists</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
-
-            <!-- ONLY APPOINTMENT BUTTON -->
-
-            <a
-                href="/appointments/book/"
-                class="nav-button"
-            >
-                Book Appointment
-            </a>
-
+            <!-- User Status & Buttons -->
+            <div style="display: flex; align-items: center; gap: 14px; margin-left: 12px; padding-left: 16px; border-left: 2px solid #e1eeee;">
+                {% if user.is_authenticated %}
+                    {% if user.is_staff or user.is_superuser %}
+                        <a href="{% url 'dashboard' %}" class="nav-button" style="padding: 10px 22px; font-size: 15px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none; transition: background 0.2s;">
+                            Dashboard
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" style="font-size: 15px; font-weight: 600; color: #e53e3e; text-decoration: none;">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" style="font-size: 15px; font-weight: 700; color: #0b8f8f; text-decoration: none;">
+                        Login
+                    </a>
+                    <a href="{% url 'register' %}" class="nav-button" style="padding: 10px 22px; font-size: 15px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none; transition: background 0.2s;">
+                        Register
+                    </a>
+                {% endif %}
+            </div>
         </nav>
 
     </div>
-
 </header>
 
-
 <!-- ================= HERO ================= -->
-
-<main>
-
 <section id="home" class="hero">
-
     <div class="container hero-container">
-
         <div class="hero-content">
-
-            <span class="hero-badge">
-                ✨ Trusted Family Dental Care
-            </span>
-
+            <span class="hero-badge">✨ Trusted Family Dental Care</span>
             <h1>
                 Your Smile,
                 <span>Our Priority.</span>
             </h1>
-
             <p>
                 Experience modern, compassionate and advanced
                 dental care for you and your entire family.
             </p>
 
             <div class="hero-buttons">
-
-                <!-- ONLY APPOINTMENT BUTTON ON HERO -->
-
-                <a
-                    href="/appointments/book/"
-                    class="primary-button"
-                >
+                <a href="{% url 'book_appointment' %}" class="primary-button">
                     Book an Appointment
                 </a>
-
-                <a
-                    href="#services"
-                    class="secondary-button"
-                >
+                <a href="#services" class="secondary-button">
                     Explore Services
                 </a>
-
             </div>
 
             <div class="hero-features">
-
                 <div>
                     <strong>10+</strong>
                     <span>Years Experience</span>
                 </div>
-
                 <div>
                     <strong>5K+</strong>
                     <span>Happy Patients</span>
                 </div>
-
                 <div>
                     <strong>10+</strong>
                     <span>Dental Services</span>
                 </div>
-
             </div>
-
         </div>
 
-
         <div class="hero-image">
-
             <div class="image-placeholder">
-
-                <div class="placeholder-icon">
-                    🦷
-                </div>
-
-                <h3>
-                    Professional Dental Care
-                </h3>
-
-                <p>
-                    Your smile deserves the best care.
-                </p>
-
+                <div class="placeholder-icon">🦷</div>
+                <h3>Professional Dental Care</h3>
+                <p>Your smile deserves the best care.</p>
             </div>
-
             <div class="floating-card">
-
-                <div class="floating-icon">
-                    ✓
-                </div>
-
+                <div class="floating-icon">✓</div>
                 <div>
                     <strong>Quality Care</strong>
                     <span>Patient First</span>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 
-<!-- ================= ABOUT ================= -->
-
-<section
-    id="about"
-    class="about-section"
->
-
+<!-- ================= SERVICES ================= -->
+<section id="services" class="services-section">
     <div class="container">
+        <div class="section-heading center">
+            <span>OUR SERVICES</span>
+            <h2>Complete Dental Care</h2>
+            <p>Professional dental treatments designed around your individual needs.</p>
+        </div>
 
-        <div class="section-heading">
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="service-icon">🦷</div>
+                    <div class="service-content">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        {% if service.starting_price %}
+                        <strong class="service-price" style="display: block; margin-top: 10px;">
+                            Starting from ৳{{ service.starting_price }}
+                        </strong>
+                        {% endif %}
+                    </div>
+                </div>
 
+                <!-- Action Button -->
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'book_appointment' %}?service={{ service.id }}" class="primary-button" style="display: block; text-align: center; padding: 10px 16px; font-size: 14px; text-decoration: none; border-radius: 8px;">
+                        Book This Service →
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">No dental services are currently available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ================= DENTISTS ================= -->
+<section id="dentists" class="dentists-section">
+    <div class="container">
+        <div class="section-heading center">
+            <span>OUR DENTISTS</span>
+            <h2>Meet Our Dental Experts</h2>
+            <p>Experienced professionals dedicated to your dental health.</p>
+        </div>
+
+        <div class="dentists-grid">
+            {% for dentist in dentists %}
+            <div class="dentist-card">
+                <div class="dentist-image">
+                    {% if dentist.profile_photo %}
+                    <img src="{{ dentist.profile_photo }}" alt="{{ dentist.name }}">
+                    {% else %}
+                    <div class="dentist-placeholder">👨‍⚕️</div>
+                    {% endif %}
+                </div>
+
+                <div class="dentist-info">
+                    <h3>
+                        {% if "Dr." in dentist.name or "Dr " in dentist.name %}
+                            {{ dentist.name }}
+                        {% else %}
+                            Dr. {{ dentist.name }}
+                        {% endif %}
+                    </h3>
+                    <p class="dentist-specialization">{{ dentist.specialization }}</p>
+                    {% if dentist.qualification %}
+                    <p class="dentist-qualification">{{ dentist.qualification }}</p>
+                    {% endif %}
+                    {% if dentist.experience %}
+                    <span class="dentist-experience">{{ dentist.experience }} years experience</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">Our dental specialists will be displayed here.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery" class="gallery-section">
+    <div class="container">
+        <div class="section-heading center">
+            <span>OUR GALLERY</span>
+            <h2>A Look Inside Our Clinic</h2>
+            <p>Explore photos of our modern clinic, operations, events, and facilities.</p>
+
+            {% if user.is_staff or user.is_superuser %}
+            <div style="margin-top: 20px;">
+                <a href="{% url 'upload_gallery_image' %}" class="primary-button" style="padding: 10px 20px; font-size: 14px;">
+                    + Upload Photo
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="gallery-grid">
+            {% for item in gallery_images %}
+            <div class="gallery-card {% if forloop.first %}gallery-large{% endif %}">
+                {% if item.image_url %}
+                    <img src="{{ item.image_url }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <div class="gallery-placeholder">
+                        <span>🦷</span>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.caption }}</p>
+                    </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #718487; background: #ffffff; border-radius: 12px; border: 1px solid #e1eeee;">
+                <p>No gallery photos uploaded yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= ABOUT US ================= -->
+<section id="about" class="about-section" style="background: #f7fbfb;">
+    <div class="container">
+        <div class="section-heading center">
             <span>ABOUT US</span>
-
             <h2>
                 Caring for Your Smile
                 <br>
                 <span>With Excellence</span>
             </h2>
-
-            <p>
-                At Family Dental Care, we combine modern
-                technology, experienced professionals and
-                compassionate care to provide exceptional
-                dental treatment for every member of your family.
+            <p style="max-width: 750px; margin: 0 auto;">
+                At Family Dental Care, we combine modern technology,
+                experienced professionals and compassionate care to
+                provide exceptional dental treatment for every member
+                of your family.
             </p>
-
         </div>
-
     </div>
-
-</section>
-
-
-<!-- ================= SERVICES ================= -->
-
-<section
-    id="services"
-    class="services-section"
->
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span>OUR SERVICES</span>
-
-            <h2>
-                Complete Dental Care
-            </h2>
-
-            <p>
-                Professional dental treatments designed around
-                your individual needs.
-            </p>
-
-        </div>
-
-
-        <div class="services-grid">
-
-            {% for service in services %}
-
-            <div class="service-card">
-
-                {% if service.image_url %}
-
-                <div class="service-image">
-
-                    <img
-                        src="{{ service.image_url }}"
-                        alt="{{ service.name }}"
-                    >
-
-                </div>
-
-                {% else %}
-
-                <div class="service-image">
-
-                    <div class="service-placeholder">
-                        🦷
-                    </div>
-
-                </div>
-
-                {% endif %}
-
-
-                <div class="service-content">
-
-                    <h3>
-                        {{ service.name }}
-                    </h3>
-
-                    <p>
-                        {{ service.description }}
-                    </p>
-
-
-                    <div class="service-details">
-
-                        {% if service.duration_minutes %}
-
-                        <span>
-                            {{ service.duration_minutes }} minutes
-                        </span>
-
-                        {% endif %}
-
-
-                        {% if service.starting_price %}
-
-                        <strong>
-                            From ৳{{ service.starting_price }}
-                        </strong>
-
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            {% empty %}
-
-            <div class="empty-message">
-
-                <p>
-                    Our dental services will be displayed here.
-                </p>
-
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= DENTISTS ================= -->
-
-<section
-    id="dentists"
-    class="dentists-section"
->
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span>OUR DENTISTS</span>
-
-            <h2>
-                Meet Our Dental Experts
-            </h2>
-
-            <p>
-                Experienced professionals dedicated to your
-                dental health.
-            </p>
-
-        </div>
-
-
-        <div class="dentists-grid">
-
-            {% for dentist in dentists %}
-
-            <div class="dentist-card">
-
-                <div class="dentist-image">
-
-                    {% if dentist.profile_photo %}
-
-                    <img
-                        src="{{ dentist.profile_photo }}"
-                        alt="{{ dentist.name }}"
-                    >
-
-                    {% else %}
-
-                    <div class="dentist-placeholder">
-                        👨‍⚕️
-                    </div>
-
-                    {% endif %}
-
-                </div>
-
-
-                <div class="dentist-info">
-
-                    <h3>
-                        {{ dentist.name }}
-                    </h3>
-
-                    <p class="dentist-specialization">
-                        {{ dentist.specialization }}
-                    </p>
-
-                    {% if dentist.qualification %}
-
-                    <p class="dentist-qualification">
-                        {{ dentist.qualification }}
-                    </p>
-
-                    {% endif %}
-
-                    {% if dentist.experience %}
-
-                    <span class="dentist-experience">
-                        {{ dentist.experience }} years experience
-                    </span>
-
-                    {% endif %}
-
-                    {% if dentist.bio %}
-
-                    <p class="dentist-bio">
-                        {{ dentist.bio }}
-                    </p>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-            {% empty %}
-
-            <div class="empty-message">
-
-                <p>
-                    Our dental specialists will be displayed here.
-                </p>
-
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= GALLERY ================= -->
-
-<section
-    id="gallery"
-    class="gallery-section"
->
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span>OUR GALLERY</span>
-
-            <h2>
-                A Comfortable Dental Experience
-            </h2>
-
-            <p>
-                We are committed to providing a clean,
-                modern and welcoming environment.
-            </p>
-
-        </div>
-
-
-        <div class="gallery-placeholder">
-
-            <div class="gallery-icon">
-                🏥
-            </div>
-
-            <h3>
-                Our Clinic Gallery
-            </h3>
-
-            <p>
-                Clinic photos and treatment results
-                will be displayed here.
-            </p>
-
-        </div>
-
-    </div>
-
 </section>
 
 
 <!-- ================= CONTACT ================= -->
-
-<section
-    id="contact"
-    class="contact-section"
->
-
+<section id="contact" class="contact-section">
     <div class="container">
-
         <div class="section-heading center">
-
             <span>CONTACT US</span>
-
-            <h2>
-                We're Here For You
-            </h2>
-
+            <h2>We're Here For You</h2>
         </div>
-
 
         <div class="contact-grid">
-
             <div class="contact-card">
-
                 <div>📍</div>
-
-                <h3>
-                    Our Location
-                </h3>
-
-                <p>
-                    Family Dental Care Clinic
-                </p>
-
+                <h3>Our Location</h3>
+                <p>Family Dental Care Clinic</p>
             </div>
-
-
             <div class="contact-card">
-
                 <div>📞</div>
-
-                <h3>
-                    Call Us
-                </h3>
-
-                <p>
-                    +880 1XXXXXXXXX
-                </p>
-
+                <h3>Call Us</h3>
+                <p>+880 1711266608</p>
             </div>
-
-
             <div class="contact-card">
-
                 <div>✉️</div>
-
-                <h3>
-                    Email Us
-                </h3>
-
-                <p>
-                    info@familydentalcare.com
-                </p>
-
+                <h3>Email Us</h3>
+                <p>info@familydentalcare.com</p>
             </div>
-
-
             <div class="contact-card">
-
                 <div>🕐</div>
-
-                <h3>
-                    Opening Hours
-                </h3>
-
-                <p>
-                    Sat – Thu: 9:00 AM – 9:00 PM
-                </p>
-
+                <h3>Opening Hours</h3>
+                <p>Sat – Thu: 9:00 AM – 9:00 PM</p>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 </main>
 
 
 <!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
+<footer class="footer" style="position: relative;">
     <div class="container footer-container">
-
         <div>
-
-            <a
-                href="/"
-                class="logo footer-logo"
-            >
-
-                <span class="logo-icon">
-                    🦷
-                </span>
-
+            <a href="/" class="logo footer-logo">
+                <span class="logo-icon">🦷</span>
                 <span class="logo-text">
-
-                    <strong>
-                        Family Dental Care
-                    </strong>
-
-                    <small>
-                        Advanced Dental Care
-                    </small>
-
+                    <strong>Family Dental Care</strong>
+                    <small>Advanced Dental Care</small>
                 </span>
-
             </a>
-
-            <p>
-                Quality dental care for the whole family.
-            </p>
-
+            <p>Quality dental care for the whole family.</p>
         </div>
 
-
         <div class="footer-links">
-
             <a href="#home">Home</a>
-            <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#dentists">Dentists</a>
             <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
             <a href="#contact">Contact</a>
-
         </div>
-
     </div>
 
+    <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
 
-    <div class="footer-bottom">
+        <a href="#home" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; text-decoration: none; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); transition: all 0.2s ease;">
+            <span>↑</span> Back to Top
+        </a>
 
-        <p>
-            © 2026 Family Dental Care.
-            All rights reserved.
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 13px; margin: 0;">
+            © 2026 Family Dental Care. All rights reserved.
         </p>
-
+        <p style="color: #bce9e7; font-size: 13px; font-weight: 600; margin: 0;">
+            Designed & Developed by <span style="color: #ffffff;">Intasar Mostafiz</span>
+        </p>
     </div>
-
 </footer>
 
-
 </body>
-
 </html>

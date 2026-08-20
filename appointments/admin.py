@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Appointment
 
 
@@ -12,7 +13,13 @@ class AppointmentAdmin(admin.ModelAdmin):
         "appointment_date",
         "appointment_time",
         "status",
-        "created_at",
+    )
+
+    search_fields = (
+        "patient__full_name",
+        "patient__phone",
+        "dentist__name",
+        "service__name",
     )
 
     list_filter = (
@@ -22,17 +29,13 @@ class AppointmentAdmin(admin.ModelAdmin):
         "appointment_date",
     )
 
-    search_fields = (
-        "patient__full_name",
-        "patient__phone",
-        "patient__email",
-        "dentist__name",
-        "service__name",
+    date_hierarchy = "appointment_date"
+
+    list_editable = (
+        "status",
     )
 
     ordering = (
-        "-appointment_date",
-        "-appointment_time",
+        "appointment_date",
+        "appointment_time",
     )
-
-    list_per_page = 20

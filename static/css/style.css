@@ -575,40 +575,87 @@ section {
 }
 
 
+
 /* =====================================================
    GALLERY
 ===================================================== */
 
 .gallery-section {
+    padding: 90px 0;
     background: #f7fbfb;
 }
 
-.gallery-placeholder {
-    max-width: 750px;
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 240px;
+    gap: 20px;
+    margin-top: 45px;
+}
 
-    margin: 45px auto 0;
-    padding: 60px 30px;
+.gallery-card {
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid #e1eeee;
+    background: #ffffff;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-large {
+    grid-row: span 2;
+}
+
+.gallery-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
 
     text-align: center;
 
-    border: 2px dashed #b8dede;
-    border-radius: 18px;
-
-    background: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #dff6f5,
+            #eefafa
+        );
 }
 
-.gallery-icon {
+.gallery-placeholder span {
     margin-bottom: 15px;
-    font-size: 60px;
+    font-size: 55px;
 }
 
 .gallery-placeholder h3 {
     margin-bottom: 8px;
-    font-size: 23px;
+
+    color: #173b3f;
+
+    font-size: 20px;
 }
 
 .gallery-placeholder p {
+    max-width: 280px;
+
     color: #65797c;
+
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 
@@ -1403,6 +1450,2421 @@ textarea.form-input {
 
     .hero-buttons a {
         text-align: center;
+    }
+
+}
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid #e4eeee;
+}
+
+.dashboard-nav-container {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dashboard-nav-links a {
+    padding: 9px 15px;
+    border-radius: 8px;
+    color: #315457;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dashboard-nav-links a:hover {
+    background: #e7f7f6;
+    color: #087d7d;
+}
+
+
+.dashboard-page {
+    min-height: calc(100vh - 76px);
+    padding: 55px 0 80px;
+    background: #f5fafa;
+}
+
+
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.dashboard-label {
+    color: #0b8f8f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.dashboard-header h1 {
+    margin: 7px 0;
+    color: #123b3f;
+    font-size: 42px;
+    line-height: 1.1;
+}
+
+.dashboard-header p {
+    color: #718487;
+    font-size: 15px;
+}
+
+
+.dashboard-primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 20px;
+    border-radius: 9px;
+    background: #0b8f8f;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    transition: 0.2s ease;
+}
+
+.dashboard-primary-button:hover {
+    background: #087777;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid #e1eeee;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(18, 59, 63, 0.04);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #e5f6f5;
+    font-size: 24px;
+}
+
+.dashboard-stat-card span {
+    display: block;
+    margin-bottom: 3px;
+    color: #77888a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dashboard-stat-card strong {
+    color: #173b3f;
+    font-size: 28px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.dashboard-status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #e5eeee;
+}
+
+.status-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 800;
+}
+
+.status-card small {
+    display: block;
+    color: #77888a;
+    font-size: 12px;
+}
+
+.status-card strong {
+    display: block;
+    margin-top: 2px;
+    color: #173b3f;
+    font-size: 24px;
+}
+
+.status-card.pending .status-icon {
+    background: #fff3d8;
+}
+
+.status-card.confirmed .status-icon {
+    background: #dff5ed;
+}
+
+.status-card.completed .status-icon {
+    background: #e3f2fa;
+}
+
+
+/* =====================================================
+   CONTENT PANELS
+===================================================== */
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 25px;
+}
+
+.dashboard-panel {
+    min-width: 0;
+    padding: 28px;
+    border: 1px solid #e1eeee;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(18, 59, 63, 0.04);
+}
+
+.panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.panel-header span {
+    color: #0b8f8f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.panel-header h2 {
+    margin-top: 5px;
+    color: #173b3f;
+    font-size: 22px;
+}
+
+.panel-header > a {
+    color: #0b8f8f;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   RECENT APPOINTMENTS
+===================================================== */
+
+.appointment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-row {
+    display: grid;
+    grid-template-columns: 42px 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 0;
+    border-top: 1px solid #edf2f2;
+}
+
+.appointment-avatar {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e5f6f5;
+    color: #087d7d;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.appointment-details strong,
+.appointment-details span {
+    display: block;
+}
+
+.appointment-details strong {
+    color: #23484b;
+    font-size: 14px;
+}
+
+.appointment-details span {
+    margin-top: 3px;
+    color: #819092;
+    font-size: 12px;
+}
+
+.appointment-date {
+    text-align: right;
+}
+
+.appointment-date strong,
+.appointment-date span {
+    display: block;
+}
+
+.appointment-date strong {
+    color: #294b4f;
+    font-size: 12px;
+}
+
+.appointment-date span {
+    color: #899698;
+    font-size: 11px;
+}
+
+.appointment-status {
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fff3d8;
+    color: #9b6b00;
+}
+
+.status-confirmed {
+    background: #e0f6ed;
+    color: #197052;
+}
+
+.status-completed {
+    background: #e2f1fa;
+    color: #286785;
+}
+
+.status-cancelled,
+.status-no_show {
+    background: #fdeaea;
+    color: #a23b3b;
+}
+
+
+/* =====================================================
+   UPCOMING
+===================================================== */
+
+.upcoming-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.upcoming-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-top: 1px solid #edf2f2;
+}
+
+.upcoming-date {
+    width: 48px;
+    height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #e7f7f6;
+}
+
+.upcoming-date strong {
+    color: #087d7d;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.upcoming-date span {
+    margin-top: 3px;
+    color: #4d7779;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.upcoming-info strong,
+.upcoming-info span {
+    display: block;
+}
+
+.upcoming-info strong {
+    color: #294b4f;
+    font-size: 13px;
+}
+
+.upcoming-info span {
+    margin-top: 3px;
+    color: #819092;
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.dashboard-empty {
+    padding: 45px 20px;
+    text-align: center;
+    color: #8a999b;
+}
+
+.dashboard-empty span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 30px;
+}
+
+.dashboard-empty p {
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.quick-action-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #e1eeee;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.quick-action-card > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quick-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #e7f7f6;
+    font-size: 20px;
+}
+
+.quick-action-card strong {
+    display: block;
+    color: #294b4f;
+    font-size: 14px;
+}
+
+.quick-action-card p {
+    margin-top: 2px;
+    color: #899698;
+    font-size: 11px;
+}
+
+.quick-action-card > a {
+    color: #0b8f8f;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   MODERN DASHBOARD
+===================================================== */
+
+.dashboard-body {
+    min-height: 100vh;
+    background: #f5fafa;
+}
+
+
+/* =====================================================
+   DASHBOARD LAYOUT
+===================================================== */
+
+.dashboard-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 28px 16px;
+
+    background: #ffffff;
+    border-right: 1px solid #e4eeee;
+
+    z-index: 1000;
+}
+
+
+.dashboard-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 10px;
+    margin-bottom: 42px;
+
+    color: #173b3f;
+}
+
+
+.dashboard-logo-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #e5f7f6;
+
+    font-size: 23px;
+}
+
+
+.dashboard-logo strong,
+.dashboard-logo small {
+    display: block;
+}
+
+
+.dashboard-logo strong {
+    font-size: 15px;
+}
+
+
+.dashboard-logo small {
+    margin-top: 2px;
+
+    color: #0b8f8f;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+===================================================== */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.sidebar-label {
+    display: block;
+
+    margin: 0 12px 10px;
+
+    color: #98a8aa;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.sidebar-label-space {
+    margin-top: 28px;
+}
+
+
+.sidebar-link {
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 13px;
+
+    border-radius: 9px;
+
+    color: #617578;
+
+    font-size: 13px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.sidebar-link span {
+    width: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+
+.sidebar-link:hover {
+    background: #f0f9f8;
+
+    color: #087d7d;
+
+    transform: translateX(2px);
+}
+
+
+.sidebar-link.active {
+    background: #e4f6f5;
+
+    color: #087d7d;
+}
+
+
+.sidebar-link.active strong {
+    font-weight: 800;
+}
+
+
+.sidebar-bottom {
+    padding: 10px 0 0;
+
+    border-top: 1px solid #edf2f2;
+}
+
+
+.sidebar-home {
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 13px;
+
+    color: #718386;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    border-radius: 8px;
+}
+
+
+.sidebar-home:hover {
+    background: #f4f9f9;
+    color: #087d7d;
+}
+
+
+/* =====================================================
+   MAIN AREA
+===================================================== */
+
+.dashboard-main {
+    width: calc(100% - 250px);
+
+    margin-left: 250px;
+
+    padding: 35px 42px 70px;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.dashboard-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+
+.dashboard-top-label {
+    color: #0b8f8f;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.dashboard-topbar h1 {
+    margin-top: 4px;
+
+    color: #173b3f;
+
+    font-size: 32px;
+
+    line-height: 1.2;
+}
+
+
+.dashboard-top-actions {
+    display: flex;
+    align-items: center;
+}
+
+
+.dashboard-new-button {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    background: #0b8f8f;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    box-shadow:
+        0 7px 18px
+        rgba(11, 143, 143, 0.16);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.dashboard-new-button span {
+    font-size: 18px;
+}
+
+
+.dashboard-new-button:hover {
+    background: #087777;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.dashboard-welcome {
+    margin-bottom: 25px;
+
+    padding: 22px 25px;
+
+    border: 1px solid #dceeee;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf9f8,
+            #ffffff
+        );
+}
+
+
+.dashboard-welcome h2 {
+    margin-bottom: 3px;
+
+    color: #173b3f;
+
+    font-size: 20px;
+}
+
+
+.dashboard-welcome p {
+    color: #718386;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+
+.dashboard-stat-card {
+    min-width: 0;
+
+    padding: 22px;
+
+    border:
+        1px solid
+        #e0eeee;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 7px 22px
+        rgba(18, 59, 63, 0.035);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.dashboard-stat-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #cce5e4;
+
+    box-shadow:
+        0 13px 30px
+        rgba(18, 59, 63, 0.08);
+}
+
+
+.stat-card-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.stat-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 20px;
+}
+
+
+.patients-icon {
+    background: #e7f5f8;
+}
+
+
+.dentist-icon {
+    background: #eeeaf9;
+}
+
+
+.service-icon {
+    background: #e5f6f4;
+}
+
+
+.appointment-icon {
+    background: #fff2df;
+}
+
+
+.stat-arrow {
+    color: #a1afb1;
+
+    font-size: 17px;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.dashboard-stat-card:hover .stat-arrow {
+    color: #0b8f8f;
+
+    transform: translateX(3px);
+}
+
+
+.stat-title {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #718386;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.stat-number {
+    display: block;
+
+    color: #173b3f;
+
+    font-size: 29px;
+
+    line-height: 1.2;
+}
+
+
+.stat-description {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #9aa7a9;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
+
+.dashboard-section-heading {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 17px;
+}
+
+
+.dashboard-section-heading > div > span,
+.panel-heading > div > span {
+    color: #0b8f8f;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.dashboard-section-heading h2,
+.panel-heading h2 {
+    margin-top: 4px;
+
+    color: #173b3f;
+
+    font-size: 20px;
+}
+
+
+.dashboard-section-heading > a,
+.panel-heading > a {
+    color: #0b8f8f;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+.dashboard-section-heading > a:hover,
+.panel-heading > a:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   APPOINTMENT STATUS
+===================================================== */
+
+.dashboard-status-section {
+    margin-bottom: 30px;
+}
+
+
+.status-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+.status-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 19px 21px;
+
+    border:
+        1px solid
+        #e2eeee;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+}
+
+
+.status-card-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    font-weight: 900;
+}
+
+
+.status-card > div:last-child span,
+.status-card > div:last-child strong,
+.status-card > div:last-child small {
+    display: block;
+}
+
+
+.status-card > div:last-child span {
+    color: #718386;
+
+    font-size: 11px;
+}
+
+
+.status-card > div:last-child strong {
+    margin: 1px 0;
+
+    color: #173b3f;
+
+    font-size: 24px;
+}
+
+
+.status-card > div:last-child small {
+    color: #99a5a7;
+
+    font-size: 9px;
+}
+
+
+.status-pending .status-card-icon {
+    background: #fff1d6;
+
+    color: #a47310;
+}
+
+
+.status-confirmed .status-card-icon {
+    background: #e0f6eb;
+
+    color: #247558;
+}
+
+
+.status-completed .status-card-icon {
+    background: #e2f1f8;
+
+    color: #2b718c;
+}
+
+
+/* =====================================================
+   MAIN DASHBOARD GRID
+===================================================== */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(300px, 1fr);
+
+    gap: 22px;
+
+    margin-bottom: 30px;
+}
+
+
+.dashboard-panel {
+    min-width: 0;
+
+    padding: 25px;
+
+    border:
+        1px solid
+        #e0eeee;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 7px 22px
+        rgba(18, 59, 63, 0.035);
+}
+
+
+.panel-heading {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   RECENT APPOINTMENTS
+===================================================== */
+
+.appointment-table {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.appointment-item {
+    display: grid;
+
+    grid-template-columns:
+        38px
+        minmax(120px, 1fr)
+        minmax(100px, 0.8fr)
+        auto
+        auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 0;
+
+    border-top:
+        1px solid
+        #edf2f2;
+}
+
+
+.patient-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e4f6f5;
+
+    color: #087d7d;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.appointment-patient strong,
+.appointment-patient span,
+.appointment-dentist strong,
+.appointment-dentist span,
+.appointment-time strong,
+.appointment-time span {
+    display: block;
+}
+
+
+.appointment-patient strong {
+    color: #294b4f;
+
+    font-size: 12px;
+}
+
+
+.appointment-patient span {
+    margin-top: 3px;
+
+    color: #879597;
+
+    font-size: 10px;
+}
+
+
+.appointment-dentist span {
+    color: #a0acad;
+
+    font-size: 9px;
+}
+
+
+.appointment-dentist strong {
+    margin-top: 2px;
+
+    color: #536d70;
+
+    font-size: 10px;
+}
+
+
+.appointment-time {
+    text-align: right;
+}
+
+
+.appointment-time strong {
+    color: #536d70;
+
+    font-size: 10px;
+}
+
+
+.appointment-time span {
+    margin-top: 2px;
+
+    color: #929e9f;
+
+    font-size: 9px;
+}
+
+
+.appointment-badge,
+.upcoming-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.status-pending {
+    background: #fff2d8;
+
+    color: #9a6a09;
+}
+
+
+.status-confirmed {
+    background: #e0f5ea;
+
+    color: #277156;
+}
+
+
+.status-completed {
+    background: #e1f0f7;
+
+    color: #2d6c83;
+}
+
+
+.status-cancelled,
+.status-no_show {
+    background: #fde9e9;
+
+    color: #a43c3c;
+}
+
+
+/* =====================================================
+   UPCOMING APPOINTMENTS
+===================================================== */
+
+.upcoming-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.upcoming-item {
+    display: grid;
+
+    grid-template-columns:
+        46px
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-top:
+        1px solid
+        #edf2f2;
+}
+
+
+.upcoming-date {
+    width: 46px;
+    height: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #e7f7f6;
+}
+
+
+.upcoming-date strong {
+    color: #087d7d;
+
+    font-size: 17px;
+
+    line-height: 1;
+}
+
+
+.upcoming-date span {
+    margin-top: 3px;
+
+    color: #5e7e80;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+
+.upcoming-details strong,
+.upcoming-details span,
+.upcoming-details small {
+    display: block;
+}
+
+
+.upcoming-details strong {
+    color: #294b4f;
+
+    font-size: 11px;
+}
+
+
+.upcoming-details span {
+    margin-top: 3px;
+
+    color: #718386;
+
+    font-size: 9px;
+}
+
+
+.upcoming-details small {
+    margin-top: 2px;
+
+    color: #9aa7a9;
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.dashboard-empty {
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+
+.dashboard-empty span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 28px;
+}
+
+
+.dashboard-empty h3 {
+    margin-bottom: 3px;
+
+    color: #526d70;
+
+    font-size: 14px;
+}
+
+
+.dashboard-empty p {
+    color: #9aa7a9;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions-section {
+    margin-top: 5px;
+}
+
+
+.quick-actions-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.quick-action {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 17px;
+
+    border:
+        1px solid
+        #e1eeee;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #294b4f;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.quick-action:hover {
+    transform: translateY(-3px);
+
+    border-color: #cce5e4;
+
+    box-shadow:
+        0 10px 25px
+        rgba(18, 59, 63, 0.07);
+}
+
+
+.quick-action-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #e7f7f6;
+
+    font-size: 17px;
+}
+
+
+.quick-action > div:nth-child(2) {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.quick-action strong,
+.quick-action span {
+    display: block;
+}
+
+
+.quick-action strong {
+    color: #294b4f;
+
+    font-size: 11px;
+}
+
+
+.quick-action span {
+    margin-top: 2px;
+
+    color: #899698;
+
+    font-size: 8px;
+}
+
+
+.quick-action b {
+    color: #0b8f8f;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   DASHBOARD RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .dashboard-main {
+        padding: 30px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .quick-actions-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 950px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        width: 210px;
+    }
+
+    .dashboard-main {
+        width: calc(100% - 210px);
+
+        margin-left: 210px;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .dashboard-sidebar {
+        position: static;
+
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 18px;
+    }
+
+    .dashboard-layout {
+        display: block;
+    }
+
+    .dashboard-main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 25px 18px 50px;
+    }
+
+    .sidebar-nav {
+        margin-top: 20px;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .sidebar-label {
+        grid-column: 1 / -1;
+    }
+
+    .sidebar-label-space {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        margin-top: 15px;
+    }
+
+    .dashboard-topbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-welcome {
+        padding: 18px;
+    }
+
+    .dashboard-panel {
+        padding: 18px 14px;
+    }
+
+    .appointment-item {
+        grid-template-columns:
+            38px
+            1fr;
+
+        align-items: start;
+    }
+
+    .appointment-dentist,
+    .appointment-time,
+    .appointment-badge {
+        grid-column: 2;
+    }
+
+    .appointment-time {
+        text-align: left;
+    }
+
+    .upcoming-item {
+        grid-template-columns:
+            46px
+            1fr;
+    }
+
+    .upcoming-status {
+        grid-column: 2;
+
+        justify-self: start;
+    }
+
+}
+/* =====================================================
+   APPOINTMENTS PAGE
+===================================================== */
+
+.appointments-page {
+    min-height: 100vh;
+    background: #f5fafa;
+}
+
+
+/* -----------------------------------------------------
+   HEADER
+----------------------------------------------------- */
+
+.appointments-header {
+    padding: 55px 0;
+    background: linear-gradient(
+        135deg,
+        #e8f8f7,
+        #ffffff
+    );
+    border-bottom: 1px solid #e1eeee;
+}
+
+.appointments-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.page-label {
+    color: #0b8f8f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.appointments-heading h1 {
+    margin: 8px 0;
+    color: #123b3f;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1.1;
+}
+
+.appointments-heading p {
+    color: #64787b;
+    font-size: 16px;
+}
+
+
+/* -----------------------------------------------------
+   CONTENT
+----------------------------------------------------- */
+
+.appointments-section {
+    padding: 55px 0 90px;
+}
+
+
+/* -----------------------------------------------------
+   SUMMARY
+----------------------------------------------------- */
+
+.appointment-summary {
+    margin-bottom: 25px;
+}
+
+.appointment-summary-card {
+    width: 220px;
+    padding: 22px 24px;
+    border: 1px solid #e0eeee;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(18, 59, 63, 0.05);
+}
+
+.appointment-summary-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: #738689;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.appointment-summary-card strong {
+    color: #0b8f8f;
+    font-size: 30px;
+}
+
+
+/* -----------------------------------------------------
+   APPOINTMENT CARD
+----------------------------------------------------- */
+
+.appointments-card {
+    overflow: hidden;
+    border: 1px solid #e0eeee;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(18, 59, 63, 0.05);
+}
+
+.appointments-card-header {
+    padding: 25px 28px;
+    border-bottom: 1px solid #edf2f2;
+}
+
+.appointments-card-header h2 {
+    margin-bottom: 4px;
+    color: #173b3f;
+    font-size: 22px;
+}
+
+.appointments-card-header p {
+    color: #7a898b;
+    font-size: 13px;
+}
+
+
+/* -----------------------------------------------------
+   TABLE
+----------------------------------------------------- */
+
+.appointments-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.appointments-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+.appointments-table th {
+    padding: 15px 20px;
+    background: #f7fbfb;
+    color: #6b7e80;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.appointments-table td {
+    padding: 18px 20px;
+    border-top: 1px solid #edf2f2;
+    color: #456164;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.appointments-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.appointments-table tbody tr:hover {
+    background: #f8fcfc;
+}
+
+.appointments-table td strong,
+.appointments-table td small {
+    display: block;
+}
+
+.appointments-table td strong {
+    margin-bottom: 3px;
+    color: #173b3f;
+}
+
+.appointments-table td small {
+    color: #849294;
+    font-size: 11px;
+}
+
+
+/* -----------------------------------------------------
+   STATUS
+----------------------------------------------------- */
+
+.appointment-status {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.status-pending {
+    background: #fff4d6;
+    color: #9a6a00;
+}
+
+.status-confirmed {
+    background: #e2f7f3;
+    color: #08766d;
+}
+
+.status-completed {
+    background: #e5f1ff;
+    color: #24649a;
+}
+
+.status-cancelled {
+    background: #ffe8e8;
+    color: #a73d3d;
+}
+
+.status-no_show {
+    background: #eeeeee;
+    color: #666666;
+}
+
+
+/* -----------------------------------------------------
+   EMPTY STATE
+----------------------------------------------------- */
+
+.appointments-empty {
+    padding: 70px 25px;
+    text-align: center;
+}
+
+.appointments-empty-icon {
+    margin-bottom: 15px;
+    font-size: 55px;
+}
+
+.appointments-empty h3 {
+    margin-bottom: 8px;
+    color: #173b3f;
+    font-size: 22px;
+}
+
+.appointments-empty p {
+    max-width: 450px;
+    margin: 0 auto 25px;
+    color: #718487;
+    font-size: 14px;
+}
+
+
+/* -----------------------------------------------------
+   RESPONSIVE
+----------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+    .appointments-header {
+        padding: 45px 0;
+    }
+
+    .appointments-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .appointments-heading .primary-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .appointments-section {
+        padding: 40px 0 70px;
+    }
+
+    .appointment-summary-card {
+        width: 100%;
+    }
+
+    .appointments-card-header {
+        padding: 22px 20px;
+    }
+
+}
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-page {
+    background: #f5fafa;
+}
+
+.dashboard-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e2eeee;
+}
+
+.dashboard-header-inner {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard-admin-button,
+.dashboard-home-button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.dashboard-admin-button {
+    background: #0b8f8f;
+    color: #ffffff;
+}
+
+.dashboard-home-button {
+    border: 1px solid #d5e4e4;
+    background: #ffffff;
+    color: #315457;
+}
+
+.dashboard-main {
+    padding: 55px 0 80px;
+}
+
+.dashboard-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.dashboard-intro > div > span {
+    color: #0b8f8f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.dashboard-intro h1 {
+    margin: 6px 0;
+    color: #173b3f;
+    font-size: 42px;
+}
+
+.dashboard-intro p {
+    color: #6c7f81;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e1eeee;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #e2f5f4;
+    font-size: 22px;
+}
+
+.stat-label {
+    display: block;
+    margin-bottom: 3px;
+    color: #7a898b;
+    font-size: 12px;
+}
+
+.stat-card strong {
+    color: #173b3f;
+    font-size: 28px;
+}
+
+.dashboard-status-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.status-card {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e5eeee;
+}
+
+.status-card span,
+.status-card strong {
+    display: block;
+}
+
+.status-card span {
+    color: #718487;
+    font-size: 12px;
+}
+
+.status-card strong {
+    margin-top: 3px;
+    color: #173b3f;
+    font-size: 25px;
+}
+
+.status-card.pending {
+    border-left: 4px solid #e0a526;
+}
+
+.status-card.confirmed {
+    border-left: 4px solid #0b8f8f;
+}
+
+.status-card.completed {
+    border-left: 4px solid #31915d;
+}
+
+.status-card.cancelled {
+    border-left: 4px solid #c95353;
+}
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 25px;
+}
+
+.dashboard-panel {
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #e1eeee;
+    border-radius: 18px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.panel-header > div > span {
+    color: #0b8f8f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.panel-header h2 {
+    margin-top: 4px;
+    color: #173b3f;
+    font-size: 21px;
+}
+
+.panel-header a {
+    color: #0b8f8f;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.appointment-list,
+.upcoming-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-row,
+.upcoming-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px 0;
+    border-bottom: 1px solid #edf2f2;
+}
+
+.appointment-row:last-child,
+.upcoming-row:last-child {
+    border-bottom: none;
+}
+
+.appointment-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #dff5f4;
+    color: #087d7d;
+    font-weight: 800;
+}
+
+.appointment-details {
+    min-width: 0;
+    flex: 1;
+}
+
+.appointment-details strong,
+.appointment-details span {
+    display: block;
+}
+
+.appointment-details strong {
+    color: #294b4f;
+    font-size: 14px;
+}
+
+.appointment-details span {
+    margin-top: 3px;
+    color: #7a898b;
+    font-size: 12px;
+}
+
+.appointment-status {
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.appointment-status.pending {
+    background: #fff4d7;
+    color: #9a7116;
+}
+
+.appointment-status.confirmed {
+    background: #dff5f4;
+    color: #087d7d;
+}
+
+.appointment-status.completed {
+    background: #e1f5e8;
+    color: #2f7e4f;
+}
+
+.appointment-status.cancelled,
+.appointment-status.no_show {
+    background: #fde7e7;
+    color: #a43d3d;
+}
+
+.upcoming-date {
+    width: 50px;
+    padding: 8px;
+    text-align: center;
+    border-radius: 10px;
+    background: #e4f5f4;
+}
+
+.upcoming-date strong,
+.upcoming-date span {
+    display: block;
+}
+
+.upcoming-date strong {
+    color: #087d7d;
+    font-size: 20px;
+}
+
+.upcoming-date span {
+    color: #5d7779;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.upcoming-row > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.upcoming-row > div:last-child strong {
+    color: #294b4f;
+    font-size: 14px;
+}
+
+.upcoming-row > div:last-child span {
+    margin-top: 3px;
+    color: #7a898b;
+    font-size: 12px;
+}
+
+.dashboard-empty {
+    padding: 35px 10px;
+    text-align: center;
+    color: #829092;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE DASHBOARD
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-header-inner {
+        flex-direction: column;
+        padding: 15px 0;
+    }
+
+    .dashboard-intro {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dashboard-intro h1 {
+        font-size: 34px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-actions {
+        width: 100%;
+    }
+
+    .dashboard-actions a {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 220px;
+    }
+
+    .gallery-large {
+        grid-row: span 1;
     }
 
 }
