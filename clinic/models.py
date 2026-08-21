@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 
 
@@ -27,7 +28,11 @@ class Dentist(models.Model):
     experience = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True)
-    profile_photo = models.URLField(blank=True)
+    profile_photo = CloudinaryField(
+        "profile_photo",
+        blank=True,
+        null=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

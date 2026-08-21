@@ -185,12 +185,16 @@
             {% for dentist in dentists %}
             <div class="dentist-card">
                 <div class="dentist-image">
-                    {% if dentist.profile_photo %}
-                    <img src="{{ dentist.profile_photo }}" alt="{{ dentist.name }}">
-                    {% else %}
-                    <div class="dentist-placeholder">👨‍⚕️</div>
-                    {% endif %}
-                </div>
+    {% if dentist.profile_photo %}
+        {% if dentist.profile_photo.url %}
+            <img src="{{ dentist.profile_photo.url }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
+        {% else %}
+            <img src="{{ dentist.profile_photo }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
+        {% endif %}
+    {% else %}
+        <div class="dentist-placeholder">👨‍⚕️</div>
+    {% endif %}
+</div>
 
                 <div class="dentist-info">
                     <h3>
