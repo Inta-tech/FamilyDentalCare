@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import AppointmentForm, create_appointment
 
 
-def book_appointment(request):
+def book_appointment(request, dentist_id=None):
     if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
@@ -25,6 +25,11 @@ def book_appointment(request):
                 full_name if full_name else request.user.username
             )
             initial_data["email"] = request.user.email
+
+        # Pre-select dentist passed via path variable or URL parameter (?dentist=ID)
+        selected_dentist = dentist_id or request.GET.get("dentist")
+        if selected_dentist:
+            initial_data["dentist"] = selected_dentist
 
         # Pre-select service passed via URL parameter (?service=ID)
         service_id = request.GET.get("service")

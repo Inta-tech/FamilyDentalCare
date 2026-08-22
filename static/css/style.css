@@ -501,8 +501,8 @@ section {
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
-        display: flex;
-    flex-direction: column; /* Ensures layout flows naturally */
+    display: flex;
+    flex-direction: column;
 }
 
 .dentist-card:hover {
@@ -512,13 +512,9 @@ section {
         0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
-/* =====================================================
-   DENTISTS (UPDATED FIX FOR HEAD CROPPING)
-===================================================== */
-
 .dentist-image {
     width: 100%;
-    height: 320px; /* Gives all dentist cards a uniform height */
+    height: 320px;
     background: #f7fbfb;
     display: flex;
     align-items: center;
@@ -529,9 +525,9 @@ section {
 .dentist-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain !important; /* <--- Shows 100% of the photo without cutting anything */
+    object-fit: contain !important;
     object-position: center;
-    padding: 10px; /* Adds clean breathing room around portrait photos */
+    padding: 10px;
 }
 
 .dentist-placeholder {
@@ -581,7 +577,6 @@ section {
 }
 
 
-
 /* =====================================================
    GALLERY
 ===================================================== */
@@ -604,6 +599,9 @@ section {
     border-radius: 18px;
     border: 1px solid #e1eeee;
     background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
@@ -614,6 +612,14 @@ section {
 
     box-shadow:
         0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Shows full photo/logo without cropping */
+    object-position: center !important;
+    padding: 12px;
 }
 
 .gallery-large {
@@ -1460,6 +1466,7 @@ textarea.form-input {
 
 }
 
+
 /* =====================================================
    DASHBOARD
 ===================================================== */
@@ -1940,6 +1947,7 @@ textarea.form-input {
     font-weight: 800;
     white-space: nowrap;
 }
+
 
 /* =====================================================
    MODERN DASHBOARD
@@ -3198,6 +3206,8 @@ textarea.form-input {
     }
 
 }
+
+
 /* =====================================================
    APPOINTMENTS PAGE
 ===================================================== */
@@ -3476,6 +3486,7 @@ textarea.form-input {
     }
 
 }
+
 
 /* =====================================================
    DASHBOARD

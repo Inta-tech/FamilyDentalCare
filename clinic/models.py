@@ -137,6 +137,11 @@ class TreatmentImage(models.Model):
     def __str__(self):
         return f"{self.treatment} - {self.image_type}"
 
+from cloudinary.models import CloudinaryField
+from django.db import models
+
+# ... Patient, Dentist, Service, Treatment, TreatmentImage models stay the same ...
+
 
 class GalleryImage(models.Model):
 
@@ -153,9 +158,8 @@ class GalleryImage(models.Model):
         choices=CATEGORY_CHOICES,
         default="facility",
     )
-    image_url = models.URLField(
-        help_text="Cloudflare R2 or external photo URL"
-    )
+    # Replaced image_url with Cloudinary image upload field
+    image = CloudinaryField("image", folder="gallery/", blank=True, null=True)
     caption = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -13,7 +13,7 @@
 <header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
     <div class="container nav-container" style="max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
 
-        <!-- Branding (Enlarged Logo Icon & Text) -->
+        <!-- Branding -->
         <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
             <span class="logo-icon" style="font-size: 38px; line-height: 1;">🦷</span>
             <span class="logo-text" style="display: flex; flex-direction: column;">
@@ -60,50 +60,59 @@
     </div>
 </header>
 
-    <!-- ================= FORM CONTENT ================= -->
-    <div class="container" style="min-height: calc(100vh - 100px); display: flex; align-items: center; justify-content: center; padding: 60px 0;">
-        <div class="booking-form-card" style="width: 100%; max-width: 480px; padding: 40px; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e1eeee;">
+<!-- ================= FORM CONTENT ================= -->
+<div class="container" style="min-height: calc(100vh - 100px); display: flex; align-items: center; justify-content: center; padding: 60px 0;">
+    <div class="booking-form-card" style="width: 100%; max-width: 480px; padding: 40px; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e1eeee;">
 
-            <div class="form-header" style="text-align: center; margin-bottom: 30px;">
-                <h2 style="font-size: 28px; font-weight: 800; color: #173b3f; margin-bottom: 8px;">Welcome Back</h2>
-                <p style="font-size: 15px; color: #5f7578;">Sign in using your Email Address or Phone Number.</p>
-            </div>
+        <div class="form-header" style="text-align: center; margin-bottom: 30px;">
+            <h2 style="font-size: 28px; font-weight: 800; color: #173b3f; margin-bottom: 8px;">Welcome Back</h2>
+            <p style="font-size: 15px; color: #5f7578;">Sign in using your Email Address or Phone Number.</p>
+        </div>
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="form-error-box" style="margin-bottom: 20px; padding: 12px 16px; border-radius: 8px; font-size: 14px; {% if message.tags == 'success' %}background: #effbf7; border: 1px solid #bce2d9; color: #236a5c;{% else %}background: #fdf2f2; border: 1px solid #f8b4b4; color: #9b1c1c;{% endif %}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="form-error-box" style="margin-bottom: 20px; padding: 12px 16px; border-radius: 8px; font-size: 14px; {% if message.tags == 'success' %}background: #effbf7; border: 1px solid #bce2d9; color: #236a5c;{% else %}background: #fdf2f2; border: 1px solid #f8b4b4; color: #9b1c1c;{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-            <form method="POST" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-grid" style="display: flex; flex-direction: column; gap: 20px;">
-                    {% for field in form %}
-                        <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                            <label for="{{ field.id_for_label }}" style="font-size: 14px; font-weight: 700; color: #173b3f;">{{ field.label }}</label>
-                            {{ field }}
-                            {% if field.errors %}
-                                <div class="field-error" style="color: #e53e3e; font-size: 12px; margin-top: 4px;">{{ field.errors.0 }}</div>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-grid" style="display: flex; flex-direction: column; gap: 20px;">
+                {% for field in form %}
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+
+                        <!-- Label & Forgot Password Link Header -->
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label for="{{ field.id_for_label }}" style="font-size: 14px; font-weight: 700; color: #173b3f; margin: 0;">{{ field.label }}</label>
+                            {% if field.name == 'password' %}
+                                <a href="{% url 'password_reset' %}" style="font-size: 13px; color: #0b8f8f; font-weight: 600; text-decoration: none;">Forgot Password?</a>
                             {% endif %}
                         </div>
-                    {% endfor %}
-                </div>
 
-                <div style="margin-top: 30px;">
-                    <button type="submit" class="booking-submit" style="width: 100%; padding: 14px; font-size: 16px; font-weight: 700; background: #0b8f8f; color: #ffffff; border: none; border-radius: 8px; cursor: pointer;">
-                        Sign In
-                    </button>
-                </div>
-            </form>
+                        {{ field }}
 
-            <div style="text-align: center; margin-top: 25px; font-size: 14px; color: #718386;">
-                Don't have an account? <a href="{% url 'register' %}" style="color: #0b8f8f; font-weight: 700; text-decoration: none;">Register Here</a>
+                        {% if field.errors %}
+                            <div class="field-error" style="color: #e53e3e; font-size: 12px; margin-top: 4px;">{{ field.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
 
+            <div style="margin-top: 30px;">
+                <button type="submit" class="booking-submit" style="width: 100%; padding: 14px; font-size: 16px; font-weight: 700; background: #0b8f8f; color: #ffffff; border: none; border-radius: 8px; cursor: pointer;">
+                    Sign In
+                </button>
+            </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 25px; font-size: 14px; color: #718386;">
+            Don't have an account? <a href="{% url 'register' %}" style="color: #0b8f8f; font-weight: 700; text-decoration: none;">Register Here</a>
         </div>
+
     </div>
+</div>
 
 </body>
 </html>

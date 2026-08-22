@@ -28,18 +28,19 @@ def home(request):
     return render(request, "home.html", context)
 
 
+@staff_member_required
 def upload_gallery_image(request):
     if request.method == "POST":
-        form = GalleryImageForm(request.POST)
+        # MUST INCLUDE request.FILES
+        form = GalleryImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, "Gallery photo uploaded successfully!")
+            messages.success(request, "Gallery image uploaded successfully!")
             return redirect("home")
     else:
         form = GalleryImageForm()
 
     return render(request, "clinic/upload_gallery.html", {"form": form})
-
 
 def dashboard(request):
     total_patients = Patient.objects.count()

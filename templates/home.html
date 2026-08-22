@@ -142,33 +142,50 @@
             <p>Professional dental treatments designed around your individual needs.</p>
         </div>
 
-        <div class="services-grid">
-            {% for service in services %}
-            <div class="service-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <div class="service-icon">🦷</div>
-                    <div class="service-content">
-                        <h3>{{ service.name }}</h3>
-                        <p>{{ service.description }}</p>
-                        {% if service.starting_price %}
-                        <strong class="service-price" style="display: block; margin-top: 10px;">
-                            Starting from ৳{{ service.starting_price }}
-                        </strong>
-                        {% endif %}
-                    </div>
-                </div>
+        <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 45px;">
+    {% for service in services %}
+    <div class="service-card" style="background: #ffffff; border: 1px solid #e1eeee; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(18, 59, 63, 0.04);">
+        <div>
+            <!-- Accent Top Tag -->
+            <span style="color: #0b8f8f; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">
+                DENTAL CARE
+            </span>
 
-                <!-- Action Button -->
-                <div style="margin-top: 20px;">
-                    <a href="{% url 'book_appointment' %}?service={{ service.id }}" class="primary-button" style="display: block; text-align: center; padding: 10px 16px; font-size: 14px; text-decoration: none; border-radius: 8px;">
-                        Book This Service →
-                    </a>
-                </div>
-            </div>
-            {% empty %}
-            <p class="empty-message">No dental services are currently available.</p>
-            {% endfor %}
+            <!-- Service Title -->
+            <h3 style="font-size: 22px; font-weight: 800; color: #173b3f; margin: 8px 0 12px; line-height: 1.25;">
+                {{ service.name }}
+            </h3>
+
+            <!-- Service Description -->
+            <p style="font-size: 14px; color: #63787b; line-height: 1.6; margin-bottom: 20px;">
+                {{ service.description }}
+            </p>
         </div>
+
+        <div>
+            <!-- Pricing Header -->
+            {% if service.starting_price %}
+            <div style="padding-top: 16px; border-top: 1px solid #edf2f2; margin-bottom: 20px; display: flex; align-items: baseline; justify-content: space-between;">
+                <span style="font-size: 12px; color: #718487; font-weight: 600;">Starting from</span>
+                <strong style="color: #0b8f8f; font-size: 20px; font-weight: 800;">
+                    ৳{{ service.starting_price }}
+                </strong>
+            </div>
+            {% endif %}
+
+            <!-- Action Button -->
+            <a href="{% url 'book_appointment' %}?service={{ service.id }}" class="primary-button" style="display: block; text-align: center; padding: 12px 18px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; text-decoration: none; border-radius: 9px; transition: background 0.2s ease;">
+                Book This Service →
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #ffffff; border-radius: 12px; border: 1px solid #e1eeee; color: #718487;">
+        <p class="empty-message" style="margin: 0; font-size: 15px;">No dental services are currently available.</p>
+    </div>
+    {% endfor %}
+</div>
+
     </div>
 </section>
 
@@ -180,44 +197,50 @@
             <h2>Meet Our Dental Experts</h2>
             <p>Experienced professionals dedicated to your dental health.</p>
         </div>
-
-        <div class="dentists-grid">
-            {% for dentist in dentists %}
-            <div class="dentist-card">
-                <div class="dentist-image">
-    {% if dentist.profile_photo %}
-        {% if dentist.profile_photo.url %}
-            <img src="{{ dentist.profile_photo.url }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
-        {% else %}
-            <img src="{{ dentist.profile_photo }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
-        {% endif %}
-    {% else %}
-        <div class="dentist-placeholder">👨‍⚕️</div>
-    {% endif %}
-</div>
-
-                <div class="dentist-info">
-                    <h3>
-                        {% if "Dr." in dentist.name or "Dr " in dentist.name %}
-                            {{ dentist.name }}
-                        {% else %}
-                            Dr. {{ dentist.name }}
-                        {% endif %}
-                    </h3>
-                    <p class="dentist-specialization">{{ dentist.specialization }}</p>
-                    {% if dentist.qualification %}
-                    <p class="dentist-qualification">{{ dentist.qualification }}</p>
+<div class="dentists-grid">
+    {% for dentist in dentists %}
+    <div class="dentist-card" style="cursor: pointer;">
+        <a href="{% url 'book_appointment_with_dentist' dentist.id %}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
+            <div class="dentist-image">
+                {% if dentist.profile_photo %}
+                    {% if dentist.profile_photo.url %}
+                        <img src="{{ dentist.profile_photo.url }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
+                    {% else %}
+                        <img src="{{ dentist.profile_photo }}" alt="{{ dentist.name }}" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px;">
                     {% endif %}
-                    {% if dentist.experience %}
-                    <span class="dentist-experience">{{ dentist.experience }} years experience</span>
+                {% else %}
+                    <div class="dentist-placeholder">👨‍⚕️</div>
+                {% endif %}
+            </div>
+
+            <div class="dentist-info" style="display: flex; flex-direction: column; flex-grow: 1;">
+                <h3>
+                    {% if "Dr." in dentist.name or "Dr " in dentist.name %}
+                        {{ dentist.name }}
+                    {% else %}
+                        Dr. {{ dentist.name }}
                     {% endif %}
+                </h3>
+                <p class="dentist-specialization">{{ dentist.specialization }}</p>
+                {% if dentist.qualification %}
+                <p class="dentist-qualification">{{ dentist.qualification }}</p>
+                {% endif %}
+                {% if dentist.experience %}
+                <span class="dentist-experience">{{ dentist.experience }} years experience</span>
+                {% endif %}
+
+                <div style="margin-top: auto; padding-top: 15px;">
+                    <span class="primary-button" style="display: block; text-align: center; font-size: 13px; padding: 10px 16px;">
+                        Book Appointment
+                    </span>
                 </div>
             </div>
-            {% empty %}
-            <p class="empty-message">Our dental specialists will be displayed here.</p>
-            {% endfor %}
-        </div>
+        </a>
     </div>
+    {% empty %}
+    <p class="empty-message">Our dental specialists will be displayed here.</p>
+    {% endfor %}
+</div>
 </section>
 
 
@@ -238,25 +261,25 @@
             {% endif %}
         </div>
 
-        <div class="gallery-grid">
-            {% for item in gallery_images %}
-            <div class="gallery-card {% if forloop.first %}gallery-large{% endif %}">
-                {% if item.image_url %}
-                    <img src="{{ item.image_url }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-                {% else %}
-                    <div class="gallery-placeholder">
-                        <span>🦷</span>
-                        <h3>{{ item.title }}</h3>
-                        <p>{{ item.caption }}</p>
-                    </div>
-                {% endif %}
+       <div class="gallery-grid">
+    {% for item in gallery_images %}
+    <div class="gallery-card {% if forloop.first %}gallery-large{% endif %}">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {% else %}
+            <div class="gallery-placeholder">
+                <span>🦷</span>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.caption }}</p>
             </div>
-            {% empty %}
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #718487; background: #ffffff; border-radius: 12px; border: 1px solid #e1eeee;">
-                <p>No gallery photos uploaded yet.</p>
-            </div>
-            {% endfor %}
-        </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #718487; background: #ffffff; border-radius: 12px; border: 1px solid #e1eeee;">
+        <p>No gallery photos uploaded yet.</p>
+    </div>
+    {% endfor %}
+</div>
     </div>
 </section>
 
