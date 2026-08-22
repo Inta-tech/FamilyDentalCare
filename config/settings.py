@@ -91,6 +91,7 @@ if os.getenv("DATABASE_URL"):
 
 DATABASES = {"default": db_config}
 
+
 # Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -142,12 +143,13 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
-# Legacy attribute fallback required by legacy packages
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+# Legacy attribute fallback required by django-cloudinary-storage
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+WHITENOISE_MANIFEST_STRICT = False
 
 
 # Real Email Configuration (Gmail SMTP)
