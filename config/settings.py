@@ -120,13 +120,13 @@ STATICFILES_DIRS = [
 
 
 # Cloudinary Storage Configuration
-
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
 }
 
+# Modern Django 5.x Storage Configuration
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -136,6 +136,10 @@ STORAGES = {
     },
 }
 
+# Legacy fallback required by django-cloudinary-storage collectstatic override
+STATICFILES_STORAGE = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+)
 
 # Real Email Configuration (Gmail SMTP)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
