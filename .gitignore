@@ -36,3 +36,9 @@ htmlcov/
 
 # Static collected files
 staticfiles/
+
+.env
+*.pyc
+__pycache__/
+db.sqlite3
+media/

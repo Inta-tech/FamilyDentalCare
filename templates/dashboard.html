@@ -1,0 +1,350 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard | Family Dental Care
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+<body class="dashboard-page">
+
+<header class="dashboard-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
+    <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
+
+        <!-- Left: Branding (Increased Size & Alignment) -->
+        <a href="{% url 'dashboard' %}" style="display: flex; align-items: center; gap: 16px; text-decoration: none;">
+            <span style="font-size: 38px; line-height: 1;">🦷</span>
+            <div style="display: flex; flex-direction: column;">
+                <strong style="font-size: 24px; font-weight: 800; color: #173b3f; line-height: 1.2; letter-spacing: -0.5px;">
+                    Family Dental Care
+                </strong>
+                <span style="font-size: 14px; color: #0b8f8f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">
+                    Clinic Dashboard
+                </span>
+            </div>
+        </a>
+
+        <!-- Right: Action Buttons (Organized & Scaled) -->
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="{% url 'admin:index' %}" class="primary-button" style="padding: 12px 24px; font-size: 15px; font-weight: 700; border-radius: 8px; text-decoration: none; background: #0b8f8f; color: #ffffff; transition: background 0.2s ease;">
+                Admin Panel
+            </a>
+            <a href="{% url 'home' %}" class="secondary-button" style="padding: 12px 24px; font-size: 15px; font-weight: 700; border-radius: 8px; text-decoration: none; border: 2px solid #0b8f8f; color: #0b8f8f; background: transparent; transition: all 0.2s ease;">
+                View Website
+            </a>
+            <a href="{% url 'logout' %}" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #e53e3e; text-decoration: none; margin-left: 8px;">
+                Logout
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<!-- Spacer to prevent content from hiding behind fixed header -->
+<div style="height: 90px;"></div>
+
+
+<main class="dashboard-main">
+
+    <div class="container">
+
+        <div class="dashboard-intro">
+
+            <div>
+
+                <span>
+                    CLINIC OVERVIEW
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Monitor your clinic's patients,
+                    appointments, dentists and services.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'book_appointment' %}"
+                class="primary-button"
+            >
+                + New Appointment
+            </a>
+
+        </div>
+
+
+        <section class="dashboard-stats">
+
+            <div class="stat-card">
+
+                <span class="stat-icon">
+                    👥
+                </span>
+
+                <div>
+                    <span class="stat-label">
+                        Patients
+                    </span>
+
+                    <strong>
+                        {{ total_patients }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-icon">
+                    👨‍⚕️
+                </span>
+
+                <div>
+                    <span class="stat-label">
+                        Dentists
+                    </span>
+
+                    <strong>
+                        {{ total_dentists }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-icon">
+                    🦷
+                </span>
+
+                <div>
+                    <span class="stat-label">
+                        Services
+                    </span>
+
+                    <strong>
+                        {{ total_services }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-icon">
+                    📅
+                </span>
+
+                <div>
+                    <span class="stat-label">
+                        Appointments
+                    </span>
+
+                    <strong>
+                        {{ total_appointments }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-status-grid">
+
+            <div class="status-card pending">
+                <span>Pending</span>
+                <strong>{{ pending_appointments }}</strong>
+            </div>
+
+            <div class="status-card confirmed">
+                <span>Confirmed</span>
+                <strong>{{ confirmed_appointments }}</strong>
+            </div>
+
+            <div class="status-card completed">
+                <span>Completed</span>
+                <strong>{{ completed_appointments }}</strong>
+            </div>
+
+            <div class="status-card cancelled">
+                <span>Cancelled</span>
+                <strong>{{ cancelled_appointments }}</strong>
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            RECENT ACTIVITY
+                        </span>
+
+                        <h2>
+                            Recent Appointments
+                        </h2>
+
+                    </div>
+
+                    <a href="/admin/appointments/appointment/">
+                        View All
+                    </a>
+
+                </div>
+
+
+                {% if recent_appointments %}
+
+                <div class="appointment-list">
+
+                    {% for appointment in recent_appointments %}
+
+                    <div class="appointment-row">
+
+                        <div class="appointment-avatar">
+                            {{ appointment.patient.full_name|first|upper }}
+                        </div>
+
+                        <div class="appointment-details">
+
+                            <strong>
+                                {{ appointment.patient.full_name }}
+                            </strong>
+
+                            <span>
+                                {{ appointment.service.name }}
+                                ·
+                                {{ appointment.dentist.name }}
+                            </span>
+
+                        </div>
+
+                        <div class="appointment-status {{ appointment.status }}">
+                            {{ appointment.get_status_display }}
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="dashboard-empty">
+                    No appointments yet.
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            UPCOMING
+                        </span>
+
+                        <h2>
+                            Upcoming Appointments
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if upcoming_appointments %}
+
+                <div class="upcoming-list">
+
+                    {% for appointment in upcoming_appointments %}
+
+                    <div class="upcoming-row">
+
+                        <div class="upcoming-date">
+
+                            <strong>
+                                {{ appointment.appointment_date|date:"d" }}
+                            </strong>
+
+                            <span>
+                                {{ appointment.appointment_date|date:"M" }}
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                {{ appointment.patient.full_name }}
+                            </strong>
+
+                            <span>
+                                {{ appointment.appointment_time|time:"g:i A" }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="dashboard-empty">
+                    No upcoming appointments.
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

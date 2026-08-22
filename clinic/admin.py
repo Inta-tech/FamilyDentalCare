@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Patient, Dentist, Service, Treatment, TreatmentImage
+
+from .models import (
+    Patient,
+    Dentist,
+    Service,
+    Treatment,
+    TreatmentImage,
+    GalleryImage,
+)
 
 
 @admin.register(Patient)
@@ -10,7 +18,6 @@ class PatientAdmin(admin.ModelAdmin):
         "phone",
         "email",
         "gender",
-        "date_of_birth",
         "created_at",
     )
 
@@ -25,11 +32,8 @@ class PatientAdmin(admin.ModelAdmin):
         "created_at",
     )
 
-    ordering = (
-        "-created_at",
-    )
+    date_hierarchy = "created_at"
 
-    list_per_page = 20
 
 @admin.register(Dentist)
 class DentistAdmin(admin.ModelAdmin):
@@ -39,6 +43,7 @@ class DentistAdmin(admin.ModelAdmin):
         "specialization",
         "qualification",
         "experience",
+        "phone",
     )
 
     search_fields = (
@@ -58,13 +63,13 @@ class ServiceAdmin(admin.ModelAdmin):
         "is_active",
     )
 
-    list_filter = (
-        "is_active",
-    )
-
     search_fields = (
         "name",
         "description",
+    )
+
+    list_filter = (
+        "is_active",
     )
 
 
@@ -78,17 +83,19 @@ class TreatmentAdmin(admin.ModelAdmin):
         "treatment_date",
     )
 
+    search_fields = (
+        "patient__full_name",
+        "dentist__name",
+        "service__name",
+    )
+
     list_filter = (
         "service",
         "dentist",
         "treatment_date",
     )
 
-    search_fields = (
-        "patient__full_name",
-        "dentist__name",
-        "service__name",
-    )
+    date_hierarchy = "treatment_date"
 
 
 @admin.register(TreatmentImage)
@@ -104,3 +111,27 @@ class TreatmentImageAdmin(admin.ModelAdmin):
     list_filter = (
         "image_type",
     )
+
+
+@admin.register(GalleryImage)
+class GalleryImageAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "category",
+        "is_active",
+        "created_at",
+    )
+
+    search_fields = (
+        "title",
+        "caption",
+    )
+
+    list_filter = (
+        "category",
+        "is_active",
+        "created_at",
+    )
+
+    date_hierarchy = "created_at"

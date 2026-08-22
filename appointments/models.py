@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 from clinic.models import Patient, Dentist, Service
 
 
@@ -48,12 +45,19 @@ class Appointment(models.Model):
 
     notes = models.TextField(blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
 
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
 
     class Meta:
-        ordering = ["-appointment_date", "-appointment_time"]
+        ordering = [
+            "-appointment_date",
+            "-appointment_time",
+        ]
 
     def __str__(self):
         return (

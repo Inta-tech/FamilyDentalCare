@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 
 
@@ -27,7 +28,11 @@ class Dentist(models.Model):
     experience = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True)
-    profile_photo = models.URLField(blank=True)
+    profile_photo = CloudinaryField(
+        "profile_photo",
+        blank=True,
+        null=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -47,9 +52,12 @@ class Service(models.Model):
         max_digits=10,
         decimal_places=2,
         blank=True,
-        null=True
+        null=True,
     )
-    duration_minutes = models.PositiveIntegerField(blank=True, null=True)
+    duration_minutes = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+    )
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -66,18 +74,21 @@ class Treatment(models.Model):
     patient = models.ForeignKey(
         Patient,
         on_delete=models.PROTECT,
-        related_name="treatments"
+        related_name="treatments",
     )
+
     dentist = models.ForeignKey(
         Dentist,
         on_delete=models.PROTECT,
-        related_name="treatments"
+        related_name="treatments",
     )
+
     service = models.ForeignKey(
         Service,
         on_delete=models.PROTECT,
-        related_name="treatments"
+        related_name="treatments",
     )
+
     treatment_date = models.DateField()
     description = models.TextField()
     notes = models.TextField(blank=True)
@@ -93,6 +104,7 @@ class Treatment(models.Model):
 
 
 class TreatmentImage(models.Model):
+
     IMAGE_TYPES = [
         ("before", "Before"),
         ("after", "After"),
@@ -103,16 +115,57 @@ class TreatmentImage(models.Model):
     treatment = models.ForeignKey(
         Treatment,
         on_delete=models.CASCADE,
-        related_name="images"
+        related_name="images",
     )
+
     image_url = models.URLField()
+
     image_type = models.CharField(
         max_length=20,
-        choices=IMAGE_TYPES
+        choices=IMAGE_TYPES,
     )
-    caption = models.CharField(max_length=255, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    caption = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return f"{self.treatment} - {self.image_type}"
+
+from cloudinary.models import CloudinaryField
+from django.db import models
+
+# ... Patient, Dentist, Service, Treatment, TreatmentImage models stay the same ...
+
+
+class GalleryImage(models.Model):
+
+    CATEGORY_CHOICES = [
+        ("operation", "Operation / Procedure"),
+        ("event", "Clinic Event"),
+        ("facility", "Clinic & Facilities"),
+        ("other", "Other"),
+    ]
+
+    title = models.CharField(max_length=150)
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default="facility",
+    )
+    # Replaced image_url with Cloudinary image upload field
+    image = CloudinaryField("image", folder="gallery/", blank=True, null=True)
+    caption = models.CharField(max_length=255, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.title} ({self.get_category_display()})"

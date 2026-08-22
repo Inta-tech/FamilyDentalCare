@@ -1,83 +1,41 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.db import transaction
-
-from clinic.models import Patient
-
-from .forms import AppointmentForm
-from .models import Appointment
+from django.shortcuts import redirect, render
+from .forms import AppointmentForm, create_appointment
 
 
-def book_appointment(request):
-
+def book_appointment(request, dentist_id=None):
     if request.method == "POST":
-
         form = AppointmentForm(request.POST)
-
         if form.is_valid():
-
-            with transaction.atomic():
-
-                patient, created = Patient.objects.get_or_create(
-                    phone=form.cleaned_data["phone"],
-                    defaults={
-                        "full_name": form.cleaned_data["full_name"],
-                        "email": form.cleaned_data["email"],
-                        "date_of_birth": form.cleaned_data["date_of_birth"],
-                        "gender": form.cleaned_data["gender"],
-                        "address": form.cleaned_data["address"],
-                        "emergency_contact": form.cleaned_data[
-                            "emergency_contact"
-                        ],
-                    },
-                )
-
-                if not created:
-
-                    patient.full_name = form.cleaned_data["full_name"]
-                    patient.email = form.cleaned_data["email"]
-                    patient.date_of_birth = form.cleaned_data[
-                        "date_of_birth"
-                    ]
-                    patient.gender = form.cleaned_data["gender"]
-                    patient.address = form.cleaned_data["address"]
-                    patient.emergency_contact = form.cleaned_data[
-                        "emergency_contact"
-                    ]
-
-                    patient.save()
-
-                Appointment.objects.create(
-                    patient=patient,
-                    dentist=form.cleaned_data["dentist"],
-                    service=form.cleaned_data["service"],
-                    appointment_date=form.cleaned_data[
-                        "appointment_date"
-                    ],
-                    appointment_time=form.cleaned_data[
-                        "appointment_time"
-                    ],
-                    reason=form.cleaned_data["reason"],
-                    notes=form.cleaned_data["notes"],
-                    status="pending",
-                )
-
+            create_appointment(form)
             messages.success(
                 request,
-                "Your appointment request has been submitted successfully. "
-                "Our team will contact you to confirm the appointment.",
+                "Appointment booked successfully! We look forward to seeing you.",
             )
-
-            return redirect("appointments:book")
-
+            return redirect("home")
     else:
+        initial_data = {}
 
-        form = AppointmentForm()
+        # Auto-fill user information if logged in
+        if request.user.is_authenticated:
+            full_name = (
+                f"{request.user.first_name} {request.user.last_name}".strip()
+            )
+            initial_data["full_name"] = (
+                full_name if full_name else request.user.username
+            )
+            initial_data["email"] = request.user.email
 
-    return render(
-        request,
-        "appointments/book.html",
-        {
-            "form": form,
-        },
-    )
+        # Pre-select dentist passed via path variable or URL parameter (?dentist=ID)
+        selected_dentist = dentist_id or request.GET.get("dentist")
+        if selected_dentist:
+            initial_data["dentist"] = selected_dentist
+
+        # Pre-select service passed via URL parameter (?service=ID)
+        service_id = request.GET.get("service")
+        if service_id:
+            initial_data["service"] = service_id
+
+        form = AppointmentForm(initial=initial_data)
+
+    return render(request, "appointments/book.html", {"form": form})
