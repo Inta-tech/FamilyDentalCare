@@ -73,13 +73,23 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database - Uses Aiven MySQL URL on Render, Local MySQL fallback
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"mysql://root:{os.getenv('DB_PASSWORD', 'haaa@#$%^')}@127.0.0.1:3306/family_dental_care",
-        conn_max_age=600,
-    )
-}
+db_config = dj_database_url.config(
+    default=f"mysql://root:{os.getenv('DB_PASSWORD', 'haaa@#$%^')}@127.0.0.1:3306/family_dental_care",
+    conn_max_age=600,
+)
 
+# Convert url query options into PyMySQL-compatible OPTIONS dict
+if "OPTIONS" in db_config:
+    # Remove 'ssl-mode' from OPTIONS to prevent PyMySQL TypeError
+    db_config["OPTIONS"].pop("ssl-mode", None)
+    db_config["OPTIONS"].pop("ssl_mode", None)
+
+# Enable SSL for cloud DB connection if DATABASE_URL is set
+if os.getenv("DATABASE_URL"):
+    db_config["OPTIONS"] = db_config.get("OPTIONS", {})
+    db_config["OPTIONS"]["ssl"] = {"ssl": True}
+
+DATABASES = {"default": db_config}
 
 # Password validation
 
