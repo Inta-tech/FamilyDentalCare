@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="author" content="Intasar Mostafiz">
     <meta name="designer" content="Intasar Mostafiz">
     <title>Family Dental Care | Advanced Dental Care</title>
@@ -25,6 +25,11 @@
     <style>
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        body {
+            overflow-x: hidden;
+            width: 100%;
         }
     </style>
 </head>
@@ -33,7 +38,7 @@
 
 <!-- ================= NAVBAR ================= -->
 <header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
-    <div class="container nav-container" style="max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
+    <div class="container nav-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
 
         <!-- Branding (Enlarged Icon & Text) -->
         <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
@@ -49,7 +54,7 @@
         </a>
 
         <!-- Navigation Links & Actions -->
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 24px;">
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
             <a href="#home" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Home</a>
             <a href="#services" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Services</a>
             <a href="#dentists" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Dentists</a>
@@ -85,7 +90,7 @@
 <main>
 <!-- ================= HERO ================= -->
 <section id="home" class="hero">
-    <div class="container hero-container">
+    <div class="container hero-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="hero-content">
             <span class="hero-badge">✨ Trusted Family Dental Care</span>
             <h1>
@@ -142,14 +147,14 @@
 
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR SERVICES</span>
             <h2>Complete Dental Care</h2>
             <p>Professional dental treatments designed around your individual needs.</p>
         </div>
 
-        <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 45px;">
+        <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 45px; width: 100%;">
             {% for service in services %}
             <div class="service-card" style="background: #ffffff; border: 1px solid #e1eeee; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(18, 59, 63, 0.04);">
                 <div>
@@ -197,7 +202,7 @@
 
 <!-- ================= DENTISTS ================= -->
 <section id="dentists" class="dentists-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR DENTISTS</span>
             <h2>Meet Our Dental Experts</h2>
@@ -253,7 +258,7 @@
 
 <!-- ================= GALLERY ================= -->
 <section id="gallery" class="gallery-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR GALLERY</span>
             <h2>A Look Inside Our Clinic</h2>
@@ -293,7 +298,7 @@
 
 <!-- ================= ABOUT US ================= -->
 <section id="about" class="about-section" style="background: #f7fbfb;">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>ABOUT US</span>
             <h2>
@@ -314,7 +319,7 @@
 
 <!-- ================= CONTACT ================= -->
 <section id="contact" class="contact-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>CONTACT US</span>
             <h2>We're Here For You</h2>
@@ -350,7 +355,7 @@
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer" style="position: relative;">
-    <div class="container footer-container">
+    <div class="container footer-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 50px 20px; box-sizing: border-box;">
         <div>
             <a href="/" class="logo footer-logo">
                 <span class="logo-icon">🦷</span>
