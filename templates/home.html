@@ -11,36 +11,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Intasar Mostafiz">
     <meta name="designer" content="Intasar Mostafiz">
     <title>Family Dental Care | Advanced Dental Care</title>
 
-    <!-- Tailwind CDN Scaffolding Fallback -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- External Standalone Custom Stylesheet -->
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <style>
-    *, *::before, *::after {
-        box-sizing: border-box !important;
-    }
-    html, body {
-        max-width: 100vw !important;
-        width: 100% !important;
-        overflow-x: hidden !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        position: relative !important;
-    }
-    .hero-image {
-        overflow: hidden !important;
-    }
-    .floating-card {
-        right: 0px !important;
-    }
-</style>
+        *, *::before, *::after {
+            box-sizing: border-box !important;
+        }
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden !important;
+            width: 100vw;
+        }
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        /* Prevents hero floating badge from stretching document body */
+        .hero-image {
+            overflow: hidden !important;
+            position: relative;
+        }
+        .floating-card {
+            right: 0px !important;
+        }
+    </style>
 </head>
 
 <body>
