@@ -37,47 +37,47 @@
 <body>
 
 <!-- ================= NAVBAR ================= -->
-<header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
-    <div class="container nav-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+<header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 14px 0;">
+    <div class="container nav-container" style="max-width: 100%; width: 100%; margin: 0 auto; padding: 0 16px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
 
-        <!-- Branding (Enlarged Icon & Text) -->
-        <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
-            <span class="logo-icon" style="font-size: 38px; line-height: 1;">🦷</span>
+        <!-- Branding -->
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+            <span class="logo-icon" style="font-size: 32px; line-height: 1;">🦷</span>
             <span class="logo-text" style="display: flex; flex-direction: column;">
-                <strong style="font-size: 24px; font-weight: 800; color: #173b3f; line-height: 1.2; letter-spacing: -0.5px;">
+                <strong style="font-size: 20px; font-weight: 800; color: #173b3f; line-height: 1.2;">
                     Family Dental Care
                 </strong>
-                <small style="font-size: 13px; color: #0b8f8f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">
+                <small style="font-size: 11px; color: #0b8f8f; font-weight: 600; text-transform: uppercase;">
                     Advanced Dental Care
                 </small>
             </span>
         </a>
 
         <!-- Navigation Links & Actions -->
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
-            <a href="#home" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Home</a>
-            <a href="#services" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Services</a>
-            <a href="#dentists" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Dentists</a>
-            <a href="#gallery" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Gallery</a>
-            <a href="#about" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">About</a>
-            <a href="#contact" style="font-size: 16px; font-weight: 600; color: #173b3f; text-decoration: none; transition: color 0.2s;">Contact</a>
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <a href="#home" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Home</a>
+            <a href="#services" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Services</a>
+            <a href="#dentists" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Dentists</a>
+            <a href="#gallery" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Gallery</a>
+            <a href="#about" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">About</a>
+            <a href="#contact" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Contact</a>
 
             <!-- User Status & Buttons -->
-            <div style="display: flex; align-items: center; gap: 14px; margin-left: 12px; padding-left: 16px; border-left: 2px solid #e1eeee;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-left: 8px; padding-left: 12px; border-left: 2px solid #e1eeee;">
                 {% if user.is_authenticated %}
                     {% if user.is_staff or user.is_superuser %}
-                        <a href="{% url 'dashboard' %}" class="nav-button" style="padding: 10px 22px; font-size: 15px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none; transition: background 0.2s;">
+                        <a href="{% url 'dashboard' %}" class="nav-button" style="padding: 8px 16px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none;">
                             Dashboard
                         </a>
                     {% endif %}
-                    <a href="{% url 'logout' %}" style="font-size: 15px; font-weight: 600; color: #e53e3e; text-decoration: none;">
+                    <a href="{% url 'logout' %}" style="font-size: 14px; font-weight: 600; color: #e53e3e; text-decoration: none;">
                         Logout
                     </a>
                 {% else %}
-                    <a href="{% url 'login' %}" style="font-size: 15px; font-weight: 700; color: #0b8f8f; text-decoration: none;">
+                    <a href="{% url 'login' %}" style="font-size: 14px; font-weight: 700; color: #0b8f8f; text-decoration: none;">
                         Login
                     </a>
-                    <a href="{% url 'register' %}" class="nav-button" style="padding: 10px 22px; font-size: 15px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none; transition: background 0.2s;">
+                    <a href="{% url 'register' %}" class="nav-button" style="padding: 8px 16px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none;">
                         Register
                     </a>
                 {% endif %}
