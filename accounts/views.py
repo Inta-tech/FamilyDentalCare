@@ -1,9 +1,42 @@
+import threading
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.forms import PasswordResetForm
 from clinic.models import Patient
 from .forms import LoginForm, RegisterForm
+
+
+class ThreadedPasswordResetForm(PasswordResetForm):
+    def send_mail(
+        self,
+        subject_template_name,
+        email_template_name,
+        context,
+        from_email,
+        to_email,
+        html_email_template_name=None,
+    ):
+        # Sends email in a background thread to prevent worker SIGKILL/timeout on Render
+        thread = threading.Thread(
+            target=super().send_mail,
+            args=(
+                subject_template_name,
+                email_template_name,
+                context,
+                from_email,
+                to_email,
+                html_email_template_name,
+            ),
+        )
+        thread.start()
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = "accounts/password_reset.html"
+    form_class = ThreadedPasswordResetForm
 
 
 def login_view(request):
@@ -31,7 +64,9 @@ def login_view(request):
             user = authenticate(request, username=user_obj.username, password=password)
             if user:
                 login(request, user)
-                messages.success(request, f"Welcome back, {user.first_name or user.username}!")
+                messages.success(
+                    request, f"Welcome back, {user.first_name or user.username}!"
+                )
                 if user.is_staff or user.is_superuser:
                     return redirect("dashboard")
                 return redirect("home")
