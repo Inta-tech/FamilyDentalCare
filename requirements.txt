@@ -12,3 +12,4 @@ pillow
 requests
 urllib3
 certifi
+django-anymail[sendgrid]

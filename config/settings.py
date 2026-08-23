@@ -34,12 +34,23 @@ INSTALLED_APPS = [
     "cloudinary_storage",  # Must be placed above staticfiles
     "django.contrib.staticfiles",
     "cloudinary",
+"anymail",
     # Family Dental Care apps
     "accounts",
     "clinic",
     "appointments",
     "content",
 ]
+
+# Custom Resend HTTP API Email Backend
+EMAIL_BACKEND = "config.email_backend.ResendAPIBackend"
+
+ANYMAIL = {
+    "SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY", ""),
+}
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Family Dental Care <noreply@familydental.com>")
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -165,18 +176,19 @@ except (ValueError, TypeError):
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ["true", "1", "yes"]
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_TIMEOUT = 10  # Prevent Gunicorn memory spikes & SIGKILL worker kills
 
 if EMAIL_HOST_USER:
     DEFAULT_FROM_EMAIL = f"Family Dental Care <{EMAIL_HOST_USER}>"
 else:
     DEFAULT_FROM_EMAIL = "webmaster@localhost"
 
-    # Proxy SSL & Domain handling for Render deployment
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    USE_X_FORWARDED_HOST = True
-    USE_X_FORWARDED_PORT = True
+# Proxy SSL & Domain handling for Render deployment (Top Level)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
-    # CSRF Trusted Origins for Render
-    CSRF_TRUSTED_ORIGINS = [
-        "https://*.onrender.com",
-    ]
+# CSRF Trusted Origins for Render
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+]
