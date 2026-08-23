@@ -17,8 +17,8 @@ SECRET_KEY = os.getenv(
     "django-insecure-r&sgnq_4(ngaza0@7i)p7tefih&&wsy+59d+ap7$d^dx3u4yc$",
 )
 
-# False in production, controlled via Environment Variable
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# Safely parse DEBUG setting (accepts true, True, 1, yes)
+DEBUG = os.getenv("DEBUG", "False").lower() in ["true", "1", "yes"]
 
 ALLOWED_HOSTS = ["*"]
 
@@ -131,9 +131,9 @@ STATICFILES_DIRS = [
 
 # Cloudinary Storage Configuration
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME", ""),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY", ""),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET", ""),
 }
 
 # Modern Django 5.x Storage Configuration
@@ -153,11 +153,30 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 
-# Real Email Configuration (Gmail SMTP)
+# Robust Real Email Configuration (Gmail SMTP)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = f"Family Dental Care <{os.getenv('EMAIL_HOST_USER')}>"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+
+try:
+    EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+except (ValueError, TypeError):
+    EMAIL_PORT = 587
+
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ["true", "1", "yes"]
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+
+if EMAIL_HOST_USER:
+    DEFAULT_FROM_EMAIL = f"Family Dental Care <{EMAIL_HOST_USER}>"
+else:
+    DEFAULT_FROM_EMAIL = "webmaster@localhost"
+
+    # Proxy SSL & Domain handling for Render deployment
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    USE_X_FORWARDED_HOST = True
+    USE_X_FORWARDED_PORT = True
+
+    # CSRF Trusted Origins for Render
+    CSRF_TRUSTED_ORIGINS = [
+        "https://*.onrender.com",
+    ]
