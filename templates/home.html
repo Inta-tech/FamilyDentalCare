@@ -11,67 +11,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Intasar Mostafiz">
     <meta name="designer" content="Intasar Mostafiz">
     <title>Family Dental Care | Advanced Dental Care</title>
 
-    <!-- Custom Local Stylesheet -->
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- Strict Production Layout Reset -->
     <style>
         *, *::before, *::after {
             box-sizing: border-box !important;
         }
-        html, body {
-            width: 100% !important;
-            max-width: 100vw !important;
+        html {
+            scroll-behavior: smooth;
             overflow-x: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            position: relative !important;
+            width: 100vw;
         }
-        .container {
-            width: 100% !important;
-            max-width: 1200px !important;
-            margin: 0 auto !important;
-            padding: 0 16px !important;
-            box-sizing: border-box !important;
+        body {
+            overflow-x: hidden !important;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
         }
-        .hero-container {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-            gap: 40px !important;
-        }
+        /* Prevents hero floating badge from stretching document body */
         .hero-image {
             overflow: hidden !important;
-            position: relative !important;
+            position: relative;
         }
         .floating-card {
-            right: 10px !important;
-        }
-        .services-grid, .dentists-grid, .contact-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
-            gap: 24px !important;
-            width: 100% !important;
-        }
-        .gallery-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
-            grid-auto-rows: 220px !important;
-            gap: 20px !important;
-            width: 100% !important;
-        }
-        @media (max-width: 800px) {
-            .gallery-large {
-                grid-row: span 1 !important;
-            }
-            .nav-links {
-                flex-wrap: wrap !important;
-                gap: 12px !important;
-            }
+            right: 0px !important;
         }
     </style>
 </head>
@@ -80,7 +50,7 @@
 
 <!-- ================= NAVBAR ================= -->
 <header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 14px 0;">
-    <div class="container nav-container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div class="container nav-container" style="max-width: 100%; width: 100%; margin: 0 auto; padding: 0 16px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
 
         <!-- Branding -->
         <a href="/" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
@@ -95,8 +65,8 @@
             </span>
         </a>
 
-        <!-- Navigation Links -->
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+        <!-- Navigation Links & Actions -->
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
             <a href="#home" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Home</a>
             <a href="#services" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Services</a>
             <a href="#dentists" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Dentists</a>
@@ -105,7 +75,7 @@
             <a href="#contact" style="font-size: 15px; font-weight: 600; color: #173b3f; text-decoration: none;">Contact</a>
 
             <!-- User Status & Buttons -->
-            <div style="display: flex; align-items: center; gap: 10px; margin-left: 6px; padding-left: 12px; border-left: 2px solid #e1eeee;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-left: 8px; padding-left: 12px; border-left: 2px solid #e1eeee;">
                 {% if user.is_authenticated %}
                     {% if user.is_staff or user.is_superuser %}
                         <a href="{% url 'dashboard' %}" class="nav-button" style="padding: 8px 16px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; border-radius: 8px; text-decoration: none;">
@@ -129,10 +99,10 @@
     </div>
 </header>
 
-<main style="width: 100%; overflow-x: hidden;">
+<main>
 <!-- ================= HERO ================= -->
 <section id="home" class="hero">
-    <div class="container hero-container">
+    <div class="container hero-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="hero-content">
             <span class="hero-badge">✨ Trusted Family Dental Care</span>
             <h1>
@@ -189,39 +159,46 @@
 
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR SERVICES</span>
             <h2>Complete Dental Care</h2>
             <p>Professional dental treatments designed around your individual needs.</p>
         </div>
 
-        <div class="services-grid" style="margin-top: 40px;">
+        <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 45px; width: 100%;">
             {% for service in services %}
-            <div class="service-card" style="background: #ffffff; border: 1px solid #e1eeee; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(18, 59, 63, 0.04);">
+            <div class="service-card" style="background: #ffffff; border: 1px solid #e1eeee; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(18, 59, 63, 0.04);">
                 <div>
+                    <!-- Accent Top Tag -->
                     <span style="color: #0b8f8f; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">
                         DENTAL CARE
                     </span>
-                    <h3 style="font-size: 20px; font-weight: 800; color: #173b3f; margin: 8px 0 12px; line-height: 1.25;">
+
+                    <!-- Service Title -->
+                    <h3 style="font-size: 22px; font-weight: 800; color: #173b3f; margin: 8px 0 12px; line-height: 1.25;">
                         {{ service.name }}
                     </h3>
+
+                    <!-- Service Description -->
                     <p style="font-size: 14px; color: #63787b; line-height: 1.6; margin-bottom: 20px;">
                         {{ service.description }}
                     </p>
                 </div>
 
                 <div>
+                    <!-- Pricing Header -->
                     {% if service.starting_price %}
-                    <div style="padding-top: 14px; border-top: 1px solid #edf2f2; margin-bottom: 18px; display: flex; align-items: baseline; justify-content: space-between;">
+                    <div style="padding-top: 16px; border-top: 1px solid #edf2f2; margin-bottom: 20px; display: flex; align-items: baseline; justify-content: space-between;">
                         <span style="font-size: 12px; color: #718487; font-weight: 600;">Starting from</span>
-                        <strong style="color: #0b8f8f; font-size: 18px; font-weight: 800;">
+                        <strong style="color: #0b8f8f; font-size: 20px; font-weight: 800;">
                             ৳{{ service.starting_price }}
                         </strong>
                     </div>
                     {% endif %}
 
-                    <a href="{% url 'book_appointment' %}?service={{ service.id }}" class="primary-button" style="display: block; text-align: center; padding: 10px 16px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; text-decoration: none; border-radius: 8px;">
+                    <!-- Action Button -->
+                    <a href="{% url 'book_appointment' %}?service={{ service.id }}" class="primary-button" style="display: block; text-align: center; padding: 12px 18px; font-size: 14px; font-weight: 700; background: #0b8f8f; color: #ffffff; text-decoration: none; border-radius: 9px; transition: background 0.2s ease;">
                         Book This Service →
                     </a>
                 </div>
@@ -237,13 +214,13 @@
 
 <!-- ================= DENTISTS ================= -->
 <section id="dentists" class="dentists-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR DENTISTS</span>
             <h2>Meet Our Dental Experts</h2>
             <p>Experienced professionals dedicated to your dental health.</p>
         </div>
-        <div class="dentists-grid" style="margin-top: 40px;">
+        <div class="dentists-grid">
             {% for dentist in dentists %}
             <div class="dentist-card" style="cursor: pointer;">
                 <a href="{% url 'book_appointment_with_dentist' dentist.id %}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
@@ -293,7 +270,7 @@
 
 <!-- ================= GALLERY ================= -->
 <section id="gallery" class="gallery-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR GALLERY</span>
             <h2>A Look Inside Our Clinic</h2>
@@ -308,7 +285,7 @@
             {% endif %}
         </div>
 
-        <div class="gallery-grid" style="margin-top: 40px;">
+        <div class="gallery-grid">
             {% for item in gallery_images %}
             <div class="gallery-card {% if forloop.first %}gallery-large{% endif %}">
                 {% if item.image %}
@@ -333,7 +310,7 @@
 
 <!-- ================= ABOUT US ================= -->
 <section id="about" class="about-section" style="background: #f7fbfb;">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>ABOUT US</span>
             <h2>
@@ -354,13 +331,13 @@
 
 <!-- ================= CONTACT ================= -->
 <section id="contact" class="contact-section">
-    <div class="container">
+    <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>CONTACT US</span>
             <h2>We're Here For You</h2>
         </div>
 
-        <div class="contact-grid" style="margin-top: 40px;">
+        <div class="contact-grid">
             <div class="contact-card">
                 <div>📍</div>
                 <h3>Our Location</h3>
@@ -389,31 +366,32 @@
 
 
 <!-- ================= FOOTER ================= -->
-<footer class="footer" style="background: #123b3f; color: #ffffff; width: 100%; box-sizing: border-box;">
-    <div class="container footer-container" style="padding: 40px 16px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+<footer class="footer" style="position: relative; width: 100%; max-width: 100vw; overflow: hidden; box-sizing: border-box;">
+    <div class="container footer-container" style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 50px 20px; box-sizing: border-box;">
         <div>
-            <a href="/" class="logo footer-logo" style="color: #ffffff;">
+            <a href="/" class="logo footer-logo">
                 <span class="logo-icon">🦷</span>
                 <span class="logo-text">
                     <strong>Family Dental Care</strong>
-                    <small style="color: #bce9e7;">Advanced Dental Care</small>
+                    <small>Advanced Dental Care</small>
                 </span>
             </a>
-            <p style="color: #c4d5d7; margin-top: 8px; font-size: 14px;">Quality dental care for the whole family.</p>
+            <p>Quality dental care for the whole family.</p>
         </div>
 
         <div class="footer-links" style="display: flex; gap: 16px; flex-wrap: wrap;">
-            <a href="#home" style="color: #d9e8e9; font-size: 14px;">Home</a>
-            <a href="#services" style="color: #d9e8e9; font-size: 14px;">Services</a>
-            <a href="#dentists" style="color: #d9e8e9; font-size: 14px;">Dentists</a>
-            <a href="#gallery" style="color: #d9e8e9; font-size: 14px;">Gallery</a>
-            <a href="#about" style="color: #d9e8e9; font-size: 14px;">About</a>
-            <a href="#contact" style="color: #d9e8e9; font-size: 14px;">Contact</a>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#dentists">Dentists</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </div>
     </div>
 
-    <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding: 18px 16px;">
-        <a href="#home" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 13px; text-decoration: none; background: rgba(255, 255, 255, 0.08); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3);">
+    <div class="footer-bottom" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-sizing: border-box;">
+
+        <a href="#home" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; text-decoration: none; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); transition: all 0.2s ease;">
             <span>↑</span> Back to Top
         </a>
 
@@ -425,6 +403,7 @@
         </p>
     </div>
 </footer>
+
 
 </body>
 </html>
