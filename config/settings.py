@@ -150,6 +150,7 @@ STORAGES = {
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Prevent WhiteNoise from crashing during collectstatic on missing internal admin files
+WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 
 # Real Email Configuration (Gmail SMTP)
