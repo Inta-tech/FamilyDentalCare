@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Intasar Mostafiz">
     <meta name="designer" content="Intasar Mostafiz">
-    <title>Book an Appointment | Family Dental Care</title>
+    <title>Book Appointment | {{ clinic_settings.name }}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <style>
@@ -58,7 +58,7 @@
         font-weight: 800 !important;
         color: #173b3f !important;
         line-height: 1.2 !important;
-        letter-spacing: normal !important; /* Fixes word compression in title */
+        letter-spacing: normal !important;
         word-spacing: normal !important;
     }
 
@@ -75,7 +75,7 @@
     header.navbar .nav-links {
         display: flex !important;
         align-items: center !important;
-        gap: 28px !important; /* Increases physical gap between links */
+        gap: 28px !important;
     }
 
     header.navbar .nav-links a {
@@ -83,8 +83,8 @@
         font-weight: 600 !important;
         color: #173b3f !important;
         text-decoration: none !important;
-        letter-spacing: normal !important; /* Fixes condensed word spacing */
-        word-spacing: 2px !important;      /* Ensures healthy gap between words */
+        letter-spacing: normal !important;
+        word-spacing: 2px !important;
         white-space: nowrap !important;
     }
 
@@ -111,8 +111,8 @@
         <a href="/" class="logo">
             <span class="logo-icon">🦷</span>
             <div class="logo-text">
-                <strong>Family Dental Care</strong>
-                <small>ADVANCED DENTAL CARE</small>
+                <strong>{{ clinic_settings.name }}</strong>
+                <small>{{ clinic_settings.tagline|default:"ADVANCED DENTAL CARE" }}</small>
             </div>
         </a>
 
@@ -149,7 +149,7 @@
     <!-- HERO -->
     <section class="booking-hero">
         <div class="container">
-            <span class="booking-badge">🦷 FAMILY DENTAL CARE</span>
+            <span class="booking-badge">🦷 {{ clinic_settings.name }}</span>
             <h1>Book Your Appointment</h1>
             <p>
                 Schedule your visit with our experienced dental professionals. Complete the form below
@@ -200,8 +200,8 @@
 
                     <div class="booking-contact">
                         <span>NEED HELP?</span>
-                        <strong>+880 1711266608</strong>
-                        <small>Sat – Thu · 9:00 AM – 9:00 PM</small>
+                        <strong>{{ clinic_settings.phone|default:"+880 1711266608" }}</strong>
+                        <small>{{ clinic_settings.opening_hours|default:"Sat – Thu · 9:00 AM – 9:00 PM" }}</small>
                     </div>
                 </div>
             </aside>
@@ -411,8 +411,8 @@
             <a href="/" class="logo footer-logo">
                 <span class="logo-icon">🦷</span>
                 <span class="logo-text">
-                    <strong>Family Dental Care</strong>
-                    <small>Advanced Dental Care</small>
+                    <strong>{{ clinic_settings.name }}</strong>
+                    <small>{{ clinic_settings.tagline|default:"Advanced Dental Care" }}</small>
                 </span>
             </a>
             <p>Quality dental care for the whole family.</p>
@@ -435,7 +435,7 @@
         </a>
 
         <p style="color: rgba(255, 255, 255, 0.7); font-size: 13px; margin: 0;">
-            © 2026 Family Dental Care. All rights reserved.
+            © {% now "Y" %} {{ clinic_settings.name }}. All rights reserved.
         </p>
         <p style="color: #bce9e7; font-size: 13px; font-weight: 600; margin: 0;">
             Designed & Developed by <span style="color: #ffffff;">Intasar Mostafiz</span>
