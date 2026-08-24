@@ -306,7 +306,8 @@
 </section>
 
 
-<!-- ================= CONTACT ================= -->
+
+    <!-- ================= CONTACT ================= -->
 <section id="contact" class="contact-section">
     <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box;">
         <div class="section-heading center">
@@ -315,21 +316,40 @@
         </div>
 
         <div class="contact-grid">
+            <!-- Location (Google Maps Search) -->
             <div class="contact-card">
                 <div>📍</div>
                 <h3>Our Location</h3>
-                <p>{{ clinic_settings.address|default:"Family Dental Care Clinic" }}</p>
+                <p>
+                    <a href="https://maps.google.com/?q={{ clinic_settings.address|default:'Family Dental Care Clinic'|urlencode }}" target="_blank" style="color: inherit; text-decoration: underline;">
+                        {{ clinic_settings.address|default:"Family Dental Care Clinic" }}
+                    </a>
+                </p>
             </div>
+
+            <!-- Phone (Click to Call) -->
             <div class="contact-card">
                 <div>📞</div>
                 <h3>Call Us</h3>
-                <p>{{ clinic_settings.phone|default:"+880 1711266608" }}</p>
+                <p>
+                    <a href="tel:{{ clinic_settings.phone|default:'+880 1711266608' }}" style="color: #0b8f8f; font-weight: 700; text-decoration: none;">
+                        {{ clinic_settings.phone|default:"+880 1711266608" }}
+                    </a>
+                </p>
             </div>
+
+            <!-- Email (Click to Send Email) -->
             <div class="contact-card">
                 <div>✉️</div>
                 <h3>Email Us</h3>
-                <p>{{ clinic_settings.email|default:"info@familydentalcare.com" }}</p>
+                <p>
+                    <a href="mailto:{{ clinic_settings.email|default:'info@familydentalcare.com' }}" style="color: #0b8f8f; font-weight: 600; text-decoration: none;">
+                        {{ clinic_settings.email|default:"info@familydentalcare.com" }}
+                    </a>
+                </p>
             </div>
+
+            <!-- Opening Hours -->
             <div class="contact-card">
                 <div>🕐</div>
                 <h3>Opening Hours</h3>
@@ -338,6 +358,7 @@
         </div>
     </div>
 </section>
+
 
 </main>
 
