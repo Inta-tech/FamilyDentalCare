@@ -17,14 +17,14 @@
     <title>{{ clinic_settings.name }} | {{ clinic_settings.tagline|default:"Advanced Dental Care" }}</title>
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EZL3ZQEP9B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZL3ZQEP9B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-EZL3ZQEP9B');
-</script>
+      gtag('config', 'G-EZL3ZQEP9B');
+    </script>
 
     <!-- Custom Local Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -33,7 +33,7 @@
 <body>
 
 <!-- ================= NAVBAR ================= -->
-<header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
+<header id="top-navbar" class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
     <div class="container nav-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
 
         <!-- Branding (Dynamic Clinic Logo, Name & Tagline) -->
@@ -205,7 +205,7 @@
     <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box;">
         <div class="section-heading center">
             <span>OUR DENTISTS</span>
-            <h2>Meet Our Dental Experts</h2>
+            2>Meet Our Dental Experts</h2>
             <p>Experienced professionals dedicated to your dental health.</p>
         </div>
         <div class="dentists-grid">
@@ -410,9 +410,10 @@
 
     <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
 
-        <a href="#home" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; text-decoration: none; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); transition: all 0.2s ease;">
+        <!-- Back to Top Button with JavaScript Execution -->
+        <button type="button" onclick="scrollToTop()" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); cursor: pointer; transition: all 0.2s ease;">
             <span>↑</span> Back to Top
-        </a>
+        </button>
 
         <p style="color: rgba(255, 255, 255, 0.7); font-size: 13px; margin: 0;">
             © {% now "Y" %} {{ clinic_settings.name }}. All rights reserved.
@@ -422,6 +423,28 @@
         </p>
     </div>
 </footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+    function scrollToTop() {
+        // Smooth scroll to top of window
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+
+        // Reset scroll position for html and body
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        // Target the navbar/hero element directly to ensure complete top scroll
+        const navbar = document.getElementById('top-navbar') || document.getElementById('home');
+        if (navbar) {
+            navbar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+</script>
 
 </body>
 </html>
