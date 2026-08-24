@@ -437,9 +437,10 @@
 
     <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
 
-        <a href="#home" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; text-decoration: none; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); transition: all 0.2s ease;">
+        <!-- Back to Top Trigger Button -->
+        <button type="button" onclick="scrollToTop()" class="back-to-top-btn" style="display: inline-flex; align-items: center; gap: 8px; color: #bce9e7; font-weight: 700; font-size: 14px; background: rgba(255, 255, 255, 0.08); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(188, 233, 231, 0.3); cursor: pointer; transition: all 0.2s ease;">
             <span>↑</span> Back to Top
-        </a>
+        </button>
 
         <p style="color: rgba(255, 255, 255, 0.7); font-size: 13px; margin: 0;">
             © {% now "Y" %} {{ clinic_settings.name }}. All rights reserved.
@@ -453,6 +454,18 @@
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        const bookingPage = document.querySelector('.booking-page');
+        if (bookingPage) {
+            bookingPage.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
     function togglePatientFields() {
         const checkbox = document.getElementById('id_booking_for_other');
         const fields = [
