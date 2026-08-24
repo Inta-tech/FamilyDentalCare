@@ -246,7 +246,7 @@
 </section>
 
 
-<!-- ================= GALLERY ================= -->
+    <!-- ================= GALLERY ================= -->
 <section id="gallery" class="gallery-section">
     <div class="container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box;">
         <div class="section-heading center">
@@ -265,9 +265,9 @@
 
         <div class="gallery-grid">
             {% for item in gallery_images %}
-            <div class="gallery-card {% if forloop.first %}gallery-large{% endif %}">
+            <div class="gallery-card">
                 {% if item.image %}
-                    <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
                 {% else %}
                     <div class="gallery-placeholder">
                         <h3>{{ item.title }}</h3>
@@ -283,6 +283,7 @@
         </div>
     </div>
 </section>
+
 
 
 <!-- ================= ABOUT US ================= -->
