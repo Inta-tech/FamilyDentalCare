@@ -16,6 +16,16 @@
     <meta name="designer" content="Intasar Mostafiz">
     <title>{{ clinic_settings.name }} | {{ clinic_settings.tagline|default:"Advanced Dental Care" }}</title>
 
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EZL3ZQEP9B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EZL3ZQEP9B');
+</script>
+
     <!-- Custom Local Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
