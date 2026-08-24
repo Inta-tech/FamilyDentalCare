@@ -10,7 +10,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Appointment Submitted | Family Dental Care</title>
+    <title>Appointment Submitted | {{ clinic_settings.name }}</title>
 
     <link rel="stylesheet"
           href="{% static 'css/style.css' %}">
@@ -34,7 +34,7 @@
             <h1>Appointment Request Submitted!</h1>
 
             <p>
-                Thank you for choosing Family Dental Care.
+                Thank you for choosing {{ clinic_settings.name }}.
                 Your appointment request has been received.
             </p>
 

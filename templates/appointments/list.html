@@ -12,7 +12,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Appointments | Family Dental Care</title>
+    <title>Appointments | {{ clinic_settings.name }}</title>
 
     <link
         rel="stylesheet"
@@ -39,11 +39,11 @@
             <span class="logo-text">
 
                 <strong>
-                    Family Dental Care
+                    {{ clinic_settings.name }}
                 </strong>
 
                 <small>
-                    Advanced Dental Care
+                    {{ clinic_settings.tagline|default:"Advanced Dental Care" }}
                 </small>
 
             </span>
@@ -314,11 +314,11 @@
                 <span class="logo-text">
 
                     <strong>
-                        Family Dental Care
+                        {{ clinic_settings.name }}
                     </strong>
 
                     <small>
-                        Advanced Dental Care
+                        {{ clinic_settings.tagline|default:"Advanced Dental Care" }}
                     </small>
 
                 </span>
@@ -354,7 +354,7 @@
     <div class="footer-bottom">
 
         <p>
-            © 2026 Family Dental Care.
+            © {% now "Y" %} {{ clinic_settings.name }}.
             All rights reserved.
         </p>
 
