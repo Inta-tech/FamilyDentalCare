@@ -316,18 +316,24 @@
         </div>
 
         <div class="contact-grid">
-            <!-- Location (Google Maps Search) -->
+            <!-- Dynamic Google Maps Location Link -->
             <div class="contact-card">
                 <div>📍</div>
                 <h3>Our Location</h3>
                 <p>
-                    <a href="https://maps.google.com/?q={{ clinic_settings.address|default:'Family Dental Care Clinic'|urlencode }}" target="_blank" style="color: inherit; text-decoration: underline;">
-                        {{ clinic_settings.address|default:"Family Dental Care Clinic" }}
-                    </a>
+                    {% if clinic_settings.map_url %}
+                        <a href="{{ clinic_settings.map_url }}" target="_blank" rel="noopener noreferrer" style="color: #0b8f8f; font-weight: 600; text-decoration: underline;">
+                            {{ clinic_settings.address|default:"Family Dental Care Clinic" }}
+                        </a>
+                    {% else %}
+                        <a href="https://maps.google.com/?q={{ clinic_settings.address|default:'Family Dental Care Clinic'|urlencode }}" target="_blank" rel="noopener noreferrer" style="color: #0b8f8f; font-weight: 600; text-decoration: underline;">
+                            {{ clinic_settings.address|default:"Family Dental Care Clinic" }}
+                        </a>
+                    {% endif %}
                 </p>
             </div>
 
-            <!-- Phone (Click to Call) -->
+            <!-- Clickable Phone Number -->
             <div class="contact-card">
                 <div>📞</div>
                 <h3>Call Us</h3>
@@ -338,7 +344,7 @@
                 </p>
             </div>
 
-            <!-- Email (Click to Send Email) -->
+            <!-- Clickable Email -->
             <div class="contact-card">
                 <div>✉️</div>
                 <h3>Email Us</h3>

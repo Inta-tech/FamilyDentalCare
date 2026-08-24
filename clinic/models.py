@@ -14,6 +14,14 @@ class ClinicSetting(models.Model):
     phone = models.CharField(max_length=50, default="+880 1711266608")
     email = models.EmailField(default="info@familydentalcare.com")
     address = models.TextField(default="Family Dental Care Clinic")
+
+    # ADD THIS MAP URL FIELD:
+    map_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text="Paste custom Google Maps link (e.g., https://maps.google.com/...)"
+    )
+
     opening_hours = models.CharField(
         max_length=100, default="Sat – Thu: 9:00 AM – 9:00 PM"
     )
