@@ -1,4 +1,16 @@
 from django.contrib import admin
+from .models import ClinicSetting
+
+@admin.register(ClinicSetting)
+class ClinicSettingAdmin(admin.ModelAdmin):
+    list_display = ("name", "phone", "email")
+
+    def has_add_permission(self, request):
+        # Prevent creating multiple settings instances
+        if ClinicSetting.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
 
 from .models import (
     Patient,

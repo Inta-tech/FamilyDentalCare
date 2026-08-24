@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Intasar Mostafiz">
     <meta name="designer" content="Intasar Mostafiz">
-    <title>Family Dental Care | Advanced Dental Care</title>
+    <title>{{ clinic_settings.name }} | {{ clinic_settings.tagline|default:"Advanced Dental Care" }}</title>
 
     <!-- Custom Local Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -26,15 +26,15 @@
 <header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
     <div class="container nav-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
 
-        <!-- Branding (Enlarged Icon & Text) -->
+        <!-- Branding (Dynamic Clinic Name & Tagline) -->
         <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
             <span class="logo-icon" style="font-size: 38px; line-height: 1;">🦷</span>
             <span class="logo-text" style="display: flex; flex-direction: column;">
                 <strong style="font-size: 24px; font-weight: 800; color: #173b3f; line-height: 1.2; letter-spacing: -0.5px;">
-                    Family Dental Care
+                    {{ clinic_settings.name }}
                 </strong>
                 <small style="font-size: 13px; color: #0b8f8f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">
-                    Advanced Dental Care
+                    {{ clinic_settings.tagline|default:"Advanced Dental Care" }}
                 </small>
             </span>
         </a>
@@ -78,7 +78,7 @@
 <section id="home" class="hero">
     <div class="container hero-container" style="max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 24px; box-sizing: border-box;">
         <div class="hero-content">
-            <span class="hero-badge">✨ Trusted Family Dental Care</span>
+            <span class="hero-badge">✨ Trusted {{ clinic_settings.name }}</span>
             <h1>
                 Your Smile,
                 <span>Our Priority.</span>
@@ -286,7 +286,7 @@
                 <span>With Excellence</span>
             </h2>
             <p style="max-width: 750px; margin: 0 auto;">
-                At Family Dental Care, we combine modern technology,
+                At {{ clinic_settings.name }}, we combine modern technology,
                 experienced professionals and compassionate care to
                 provide exceptional dental treatment for every member
                 of your family.
@@ -308,22 +308,22 @@
             <div class="contact-card">
                 <div>📍</div>
                 <h3>Our Location</h3>
-                <p>Family Dental Care Clinic</p>
+                <p>{{ clinic_settings.address|default:"Family Dental Care Clinic" }}</p>
             </div>
             <div class="contact-card">
                 <div>📞</div>
                 <h3>Call Us</h3>
-                <p>+880 1711266608</p>
+                <p>{{ clinic_settings.phone|default:"+880 1711266608" }}</p>
             </div>
             <div class="contact-card">
                 <div>✉️</div>
                 <h3>Email Us</h3>
-                <p>info@familydentalcare.com</p>
+                <p>{{ clinic_settings.email|default:"info@familydentalcare.com" }}</p>
             </div>
             <div class="contact-card">
                 <div>🕐</div>
                 <h3>Opening Hours</h3>
-                <p>Sat – Thu: 9:00 AM – 9:00 PM</p>
+                <p>{{ clinic_settings.opening_hours|default:"Sat – Thu: 9:00 AM – 9:00 PM" }}</p>
             </div>
         </div>
     </div>
@@ -339,8 +339,8 @@
             <a href="/" class="logo footer-logo">
                 <span class="logo-icon">🦷</span>
                 <span class="logo-text">
-                    <strong>Family Dental Care</strong>
-                    <small>Advanced Dental Care</small>
+                    <strong>{{ clinic_settings.name }}</strong>
+                    <small>{{ clinic_settings.tagline|default:"Advanced Dental Care" }}</small>
                 </span>
             </a>
             <p>Quality dental care for the whole family.</p>
@@ -363,7 +363,7 @@
         </a>
 
         <p style="color: rgba(255, 255, 255, 0.7); font-size: 13px; margin: 0;">
-            © 2026 Family Dental Care. All rights reserved.
+            © {% now "Y" %} {{ clinic_settings.name }}. All rights reserved.
         </p>
         <p style="color: #bce9e7; font-size: 13px; font-weight: 600; margin: 0;">
             Designed & Developed by <span style="color: #ffffff;">Intasar Mostafiz</span>

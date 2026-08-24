@@ -34,22 +34,12 @@ INSTALLED_APPS = [
     "cloudinary_storage",  # Must be placed above staticfiles
     "django.contrib.staticfiles",
     "cloudinary",
-"anymail",
     # Family Dental Care apps
     "accounts",
     "clinic",
     "appointments",
     "content",
 ]
-
-# Custom Resend HTTP API Email Backend
-EMAIL_BACKEND = "config.email_backend.ResendAPIBackend"
-
-ANYMAIL = {
-    "SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY", ""),
-}
-
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Family Dental Care <noreply@familydental.com>")
 
 
 MIDDLEWARE = [
@@ -75,6 +65,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "clinic.context_processors.clinic_settings",
             ],
         },
     },
@@ -87,11 +78,20 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-    db_config = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-    if "OPTIONS" in db_config:
-        db_config["OPTIONS"].pop("ssl-mode", None)
-        db_config["OPTIONS"].pop("ssl_mode", None)
-    db_config["OPTIONS"] = db_config.get("OPTIONS", {})
+    db_config = dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+    )
+
+    if "OPTIONS" not in db_config:
+        db_config["OPTIONS"] = {}
+
+    # Strip invalid PyMySQL keywords parsed by dj_database_url from PostgreSQL/Aiven URLs
+    db_config["OPTIONS"].pop("sslmode", None)
+    db_config["OPTIONS"].pop("ssl-mode", None)
+    db_config["OPTIONS"].pop("ssl_mode", None)
+
+    # Enable SSL connection for PyMySQL
     db_config["OPTIONS"]["ssl"] = {"ssl": True}
 else:
     db_config = dj_database_url.config(
@@ -164,26 +164,13 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 
-# Robust Real Email Configuration (Gmail SMTP)
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
 
-try:
-    EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
-except (ValueError, TypeError):
-    EMAIL_PORT = 587
+# Custom Resend HTTP API Email Backend (Prevents Render Gunicorn SIGKILL Memory Crashes)
+EMAIL_BACKEND = "config.email_backend.ResendAPIBackend"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Family Dental Care <onboarding@resend.dev>")
 
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ["true", "1", "yes"]
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
-EMAIL_TIMEOUT = 10  # Prevent Gunicorn memory spikes & SIGKILL worker kills
 
-if EMAIL_HOST_USER:
-    DEFAULT_FROM_EMAIL = f"Family Dental Care <{EMAIL_HOST_USER}>"
-else:
-    DEFAULT_FROM_EMAIL = "webmaster@localhost"
-
-# Proxy SSL & Domain handling for Render deployment (Top Level)
+# Proxy SSL & Domain handling for Render deployment
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True

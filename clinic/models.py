@@ -1,6 +1,27 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
 
+class ClinicSetting(models.Model):
+    name = models.CharField(max_length=200, default="Family Dental Care")
+    tagline = models.CharField(max_length=200, default="Advanced Dental Care")
+    phone = models.CharField(max_length=50, default="+880 1711266608")
+    email = models.EmailField(default="info@familydentalcare.com")
+    address = models.TextField(default="Family Dental Care Clinic")
+    opening_hours = models.CharField(max_length=100, default="Sat – Thu: 9:00 AM – 9:00 PM")
+
+    class Meta:
+        verbose_name = "Clinic Setting"
+        verbose_name_plural = "Clinic Settings"
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+
+
 
 class Patient(models.Model):
     full_name = models.CharField(max_length=150)
