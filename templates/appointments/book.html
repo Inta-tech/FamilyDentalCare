@@ -107,9 +107,13 @@
 <header class="navbar">
     <div class="nav-container">
 
-        <!-- Brand Logo & Subtitle -->
+        <!-- Dynamic Brand Logo & Subtitle -->
         <a href="/" class="logo">
-            <span class="logo-icon">🦷</span>
+            {% if clinic_settings.logo %}
+                <img src="{{ clinic_settings.logo.url }}" alt="{{ clinic_settings.name }} Logo" style="height: 40px; width: auto; object-fit: contain;">
+            {% else %}
+                <span class="logo-icon">{{ clinic_settings.logo_icon|default:"🦷" }}</span>
+            {% endif %}
             <div class="logo-text">
                 <strong>{{ clinic_settings.name }}</strong>
                 <small>{{ clinic_settings.tagline|default:"ADVANCED DENTAL CARE" }}</small>
@@ -149,7 +153,6 @@
     <!-- HERO -->
     <section class="booking-hero">
         <div class="container">
-            <span class="booking-badge">🦷 {{ clinic_settings.name }}</span>
             <h1>Book Your Appointment</h1>
             <p>
                 Schedule your visit with our experienced dental professionals. Complete the form below
@@ -409,7 +412,11 @@
     <div class="container footer-container">
         <div>
             <a href="/" class="logo footer-logo">
-                <span class="logo-icon">🦷</span>
+                {% if clinic_settings.logo %}
+                    <img src="{{ clinic_settings.logo.url }}" alt="{{ clinic_settings.name }} Logo" style="height: 36px; width: auto; object-fit: contain;">
+                {% else %}
+                    <span class="logo-icon">{{ clinic_settings.logo_icon|default:"🦷" }}</span>
+                {% endif %}
                 <span class="logo-text">
                     <strong>{{ clinic_settings.name }}</strong>
                     <small>{{ clinic_settings.tagline|default:"Advanced Dental Care" }}</small>

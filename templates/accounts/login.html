@@ -13,9 +13,14 @@
 <header class="navbar" style="position: sticky; top: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 2px solid #e1eeee; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 18px 0;">
     <div class="container nav-container" style="max-width: 1320px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
 
-        <!-- Branding -->
+        <!-- Dynamic Branding -->
         <a href="/" class="logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
-            <span class="logo-icon" style="font-size: 38px; line-height: 1;">🦷</span>
+            {% if clinic_settings.logo %}
+                <img src="{{ clinic_settings.logo.url }}" alt="{{ clinic_settings.name }} Logo" style="height: 40px; width: auto; object-fit: contain;">
+            {% else %}
+                <span class="logo-icon" style="font-size: 38px; line-height: 1;">{{ clinic_settings.logo_icon|default:"🦷" }}</span>
+            {% endif %}
+
             <span class="logo-text" style="display: flex; flex-direction: column;">
                 <strong style="font-size: 24px; font-weight: 800; color: #173b3f; line-height: 1.2; letter-spacing: -0.5px;">
                     {{ clinic_settings.name }}

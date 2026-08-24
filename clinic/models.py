@@ -1,13 +1,22 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
 
+
 class ClinicSetting(models.Model):
     name = models.CharField(max_length=200, default="Family Dental Care")
     tagline = models.CharField(max_length=200, default="Advanced Dental Care")
+    logo = CloudinaryField("logo", folder="clinic/", blank=True, null=True)
+    logo_icon = models.CharField(
+        max_length=10,
+        default="🦷",
+        help_text="Fallback emoji icon if no image logo is uploaded",
+    )
     phone = models.CharField(max_length=50, default="+880 1711266608")
     email = models.EmailField(default="info@familydentalcare.com")
     address = models.TextField(default="Family Dental Care Clinic")
-    opening_hours = models.CharField(max_length=100, default="Sat – Thu: 9:00 AM – 9:00 PM")
+    opening_hours = models.CharField(
+        max_length=100, default="Sat – Thu: 9:00 AM – 9:00 PM"
+    )
 
     class Meta:
         verbose_name = "Clinic Setting"
@@ -19,8 +28,6 @@ class ClinicSetting(models.Model):
     def save(self, *args, **kwargs):
         self.pk = 1
         super().save(*args, **kwargs)
-
-
 
 
 class Patient(models.Model):
@@ -49,11 +56,7 @@ class Dentist(models.Model):
     experience = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True)
-    profile_photo = CloudinaryField(
-        "profile_photo",
-        blank=True,
-        null=True
-    )
+    profile_photo = CloudinaryField("profile_photo", blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -125,7 +128,6 @@ class Treatment(models.Model):
 
 
 class TreatmentImage(models.Model):
-
     IMAGE_TYPES = [
         ("before", "Before"),
         ("after", "After"),
@@ -158,14 +160,8 @@ class TreatmentImage(models.Model):
     def __str__(self):
         return f"{self.treatment} - {self.image_type}"
 
-from cloudinary.models import CloudinaryField
-from django.db import models
-
-# ... Patient, Dentist, Service, Treatment, TreatmentImage models stay the same ...
-
 
 class GalleryImage(models.Model):
-
     CATEGORY_CHOICES = [
         ("operation", "Operation / Procedure"),
         ("event", "Clinic Event"),
@@ -179,7 +175,6 @@ class GalleryImage(models.Model):
         choices=CATEGORY_CHOICES,
         default="facility",
     )
-    # Replaced image_url with Cloudinary image upload field
     image = CloudinaryField("image", folder="gallery/", blank=True, null=True)
     caption = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
