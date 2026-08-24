@@ -32,9 +32,11 @@
 
         <a href="/" class="logo">
 
-            <span class="logo-icon">
-                🦷
-            </span>
+            {% if clinic_settings.logo %}
+                <img src="{{ clinic_settings.logo.url }}" alt="{{ clinic_settings.name }} Logo" style="height: 40px; width: auto; object-fit: contain;">
+            {% else %}
+                <span class="logo-icon">{{ clinic_settings.logo_icon|default:"🦷" }}</span>
+            {% endif %}
 
             <span class="logo-text">
 
@@ -307,9 +309,11 @@
                 class="logo footer-logo"
             >
 
-                <span class="logo-icon">
-                    🦷
-                </span>
+                {% if clinic_settings.logo %}
+                    <img src="{{ clinic_settings.logo.url }}" alt="{{ clinic_settings.name }} Logo" style="height: 36px; width: auto; object-fit: contain;">
+                {% else %}
+                    <span class="logo-icon">{{ clinic_settings.logo_icon|default:"🦷" }}</span>
+                {% endif %}
 
                 <span class="logo-text">
 
