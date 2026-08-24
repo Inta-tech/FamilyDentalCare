@@ -1,22 +1,16 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import redirect, render
 
 from appointments.models import Appointment
 from .forms import GalleryImageForm
 from .models import Dentist, GalleryImage, Patient, Service
 
-# clinic/views.py
-from django.contrib.admin.views.decorators import staff_member_required
-
-@staff_member_required(login_url='login')
-def dashboard(request):
-    # Your existing dashboard logic...
-    ...
-
 
 def home(request):
     dentists = Dentist.objects.all()
-    services = Service.objects.filter(is_active=True)
+    # Order services by lowest price first
+    services = Service.objects.filter(is_active=True).order_by("starting_price")
     gallery_images = GalleryImage.objects.filter(is_active=True)[:6]
 
     context = {
@@ -31,7 +25,6 @@ def home(request):
 @staff_member_required
 def upload_gallery_image(request):
     if request.method == "POST":
-        # MUST INCLUDE request.FILES
         form = GalleryImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -42,6 +35,8 @@ def upload_gallery_image(request):
 
     return render(request, "clinic/upload_gallery.html", {"form": form})
 
+
+@staff_member_required(login_url="login")
 def dashboard(request):
     total_patients = Patient.objects.count()
     total_dentists = Dentist.objects.count()

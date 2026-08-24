@@ -96,7 +96,8 @@ class Service(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["name"]
+        # Sorts by lowest price first; services without a price appear last
+        ordering = ["starting_price"]
 
     def __str__(self):
         return self.name
